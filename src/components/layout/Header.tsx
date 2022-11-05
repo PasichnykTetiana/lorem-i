@@ -6,7 +6,7 @@ import img from './img/logo.png'
 const Header: FC = () => {
   return (
     <>
-      <Row wrap={false} align={'middle'} justify={'space-evenly'}>
+      <Row wrap={false} align={'middle'} justify={'space-between'}>
         <Col span={6}>
           <Link to={'/'}>
             <img width={200} src={img} />

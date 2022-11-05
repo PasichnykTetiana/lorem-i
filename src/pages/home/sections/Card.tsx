@@ -1,4 +1,5 @@
 import './Card.less'
+import ScrollAnimation from 'react-animate-on-scroll'
 
 import { Col, Row, Typography } from 'antd'
 import { FC } from 'react'
@@ -31,6 +32,7 @@ const Card: FC = () => {
         <Row justify={'space-between'} >
           {cards?.map(it => (
             <Col offset={1} span={7} key={it.title} className={'cards'}>
+              <ScrollAnimation animateIn="fadeInRight">
               <img src={it.src} alt={it.title} style={{width: '100%', objectFit: 'cover'}}/>
               <div style={{position: 'relative', top: -heightTitle, right: 0, left: `${100-widthLine}%`, width: `${widthLine}%`, }}>
                 <div style={{ background: 'white', height: 1, }}/>
@@ -40,6 +42,7 @@ const Card: FC = () => {
                   </Typography.Title>
                 </Row>
               </div>
+              </ScrollAnimation>
             </Col>
           ))}
         </Row>
