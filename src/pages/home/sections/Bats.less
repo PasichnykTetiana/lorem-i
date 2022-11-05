@@ -1,0 +1,24 @@
+@import 'src/components/app/index';
+
+#root {
+  .bats {
+    margin: 0 -@layout-padding;
+
+    .content {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+
+      button {
+        margin-top: 32px;
+      }
+    }
+
+    .img-container {
+      img {
+        transform: translateX(-40px);
+        width: 100%;
+      }
+    }
+  }
+}
