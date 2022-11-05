@@ -41,13 +41,14 @@ const Home: FC = () => {
           dots={{className: 'carousel'}}
         >
           {hero.map((it, i) => (
-            <HeroSection
+              <HeroSection
               key={i}
               img={it.img}
               title={it.title}
               subtitle={it.subtitle}
             />
           ))}
+
         </Carousel>
       </SectionContainer>
           <Card  />

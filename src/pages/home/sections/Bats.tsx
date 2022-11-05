@@ -1,4 +1,5 @@
 import './Bats.less'
+import ScrollAnimation from 'react-animate-on-scroll'
 
 import { Button, Col, Row, Typography } from 'antd'
 import { FC } from 'react'
@@ -9,7 +10,9 @@ const Bats: FC = () => {
   return (
     <Row className={'bats'}>
       <Col className={'img-container'} span={12}>
-        <img src={img} alt={'bats'} />
+          <ScrollAnimation animateIn='fadeIn' duration={1.5}>
+          <img src={img} alt={'bats'} />
+          </ScrollAnimation>
       </Col>
       <Col className={'content'} offset={2} span={10}>
         <div className={'block'}>
