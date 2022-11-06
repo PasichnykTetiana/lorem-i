@@ -8,6 +8,7 @@ import SectionContainer from "../../../components/section/SectionContainer";
 import card1 from './img/card.png'
 import card2 from './img/card2.png'
 import card3 from './img/card3.png'
+import {useBreakpoints} from "../../../components/screen";
 
 const Card: FC = () => {
   const cards = [
@@ -15,7 +16,7 @@ const Card: FC = () => {
     {title: 'Sed ut perspiciatis', src: card2},
     {title: 'Lorem ipsum dolor', src: card3},
   ]
-
+  const { isMD } = useBreakpoints()
   const heightTitle = 78
   const heightLine = 1
   const widthLine = 90
@@ -29,9 +30,9 @@ const Card: FC = () => {
             </Typography.Title>
           </Col>
         </Row>
-        <Row justify={'space-between'} >
+        <Row justify={isMD? 'center' : 'space-between'} >
           {cards?.map(it => (
-            <Col offset={1} span={7} key={it.title} className={'cards'}>
+            <Col span={isMD? 25 : 7} key={it.title} className={'cards'}>
               <ScrollAnimation animateIn="fadeInRight">
               <img src={it.src} alt={it.title} style={{width: '100%', objectFit: 'cover'}}/>
               <div style={{position: 'relative', top: -heightTitle, right: 0, left: `${100-widthLine}%`, width: `${widthLine}%`, }}>

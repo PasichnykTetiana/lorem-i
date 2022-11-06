@@ -7,16 +7,18 @@
     "dev": "vite",
     "build": "vite build",
     "preview": "vite preview",
-    "start": "yarn vite serve"
+    "start": "yarn vite serve",
   },
   "dependencies": {
     "@babel/preset-react": "^7.18.6",
     "@emotion/react": "^11.10.5",
     "antd": "^4.24.1",
     "less": "^4.1.3",
+    "prettier": "^2.7.1",
     "react": "^18.2.0",
     "react-animate-on-scroll": "^2.1.5",
     "react-dom": "^18.2.0",
+    "react-responsive": "^9.0.0",
     "react-router": "^6.4.3",
     "react-router-dom": "^6.4.3",
     "react-use": "^17.4.0",
@@ -25,8 +27,8 @@
   },
   "devDependencies": {
     "@types/react": "^18.0.22",
-    "@types/react-dom": "^18.0.7",
     "@types/react-animate-on-scroll": "^2.1.5",
+    "@types/react-dom": "^18.0.7",
     "@vitejs/plugin-react": "^2.2.0",
     "vite": "^3.2.0"
   },

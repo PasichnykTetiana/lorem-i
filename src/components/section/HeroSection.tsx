@@ -1,16 +1,17 @@
-//import img from './img/images.png';
 import './HeroSection.less'
 
 import { Button, Col, Row, Typography } from 'antd'
 import { FC, ReactNode } from 'react'
-import SectionContainer from "./SectionContainer";
+import {useBreakpoints} from "../screen";
 
 const HeroSection: FC<Partial<HomePage & {children?: ReactNode, button?: {href: string, text: string}}>> = ({ title, subtitle, img, info, children = '', button }) => {
-  return (
+    const { isDesktop} = useBreakpoints()
+
+    return (
       <Row className={'hero'} align={'middle'} justify={'center'}>
-        <Col span={12}>
+        <Col span={isDesktop? 12 : 24}>
           {info && <Typography.Title level={5} className={'step'}>{info}</Typography.Title>}
-          <Typography.Title level={1}>{title}</Typography.Title>
+          <Typography.Title  level={1}>{title}</Typography.Title>
           {subtitle && <Typography.Paragraph>{subtitle}</Typography.Paragraph>}
           {children}
           {button &&
@@ -21,7 +22,7 @@ const HeroSection: FC<Partial<HomePage & {children?: ReactNode, button?: {href: 
             </Row>
           }
         </Col>
-        <Col span={12}>
+        <Col span={isDesktop? 12 : 24}>
           <img src={img} alt={''} />
         </Col>
       </Row>
