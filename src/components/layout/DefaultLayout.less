@@ -101,7 +101,9 @@ html {
   header {
     margin: 20px @layout-margin;
     text-transform: uppercase;
-
+    @media only screen and (max-width: @screen-md) {
+      margin: 20px 20px;
+    }
     .triangle {
       margin-left: 12px;
       margin-top: 2px;

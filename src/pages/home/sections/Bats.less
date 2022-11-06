@@ -18,6 +18,9 @@
       img {
         transform: translateX(-40px);
         width: 100%;
+        @media only screen and (max-width: @screen-xs) {
+          width: calc(100% + 80px);
+        }
       }
     }
   }

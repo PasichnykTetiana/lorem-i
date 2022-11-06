@@ -18,19 +18,19 @@ const Home: FC = () => {
   const hero = [
     {
       img: jack,
-      title: 'Lorem ipsum dolor sit amet, consectetuer adipiscing',
+      title: 'Nullam in feugiat nisl, sed egestas justo',
       subtitle: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.',
       button: {href: '#', text: 'About managment'}
     },
     {
       img: img2,
-      title: 'Lorem ipsum dolor sit amet, consectetuer',
+      title: 'Ut sit amet odio sed elit fringilla gravida',
       subtitle: 'Malesuada fames ac turpis egestas integer eget aliquet nibh praesent.',
       button: {href: '#', text: 'Sell property'}
     },
     {
       img: img,
-      title: 'Lorem ipsum dolor sit',
+      title: 'Aliquam pellentesque a purus eget sodales',
       subtitle: 'Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo.',
       button: {href: '#', text: 'View listing'}
     },
