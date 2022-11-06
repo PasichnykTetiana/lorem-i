@@ -7,7 +7,7 @@
     "dev": "vite",
     "build": "vite build",
     "preview": "vite preview",
-    "start": "yarn vite serve",
+    "start": "yarn vite serve"
   },
   "dependencies": {
     "@babel/preset-react": "^7.18.6",
