@@ -6,17 +6,15 @@ html {
   .submenu {
     .ant-typography {
       font-size: 15px;
+
     }
   }
 }
 
 #root {
   width: 100%;
-  overflow: hidden;
+//  overflow: hidden;
 
-  .ant-layout-content, .ant-layout-footer {
-    padding: 0 @layout-padding;
-  }
 
   h1,
   h2,
@@ -31,26 +29,40 @@ html {
 
   h1 {
     font-size: 56px;
+    @media only screen and (max-width: @screen-xs) {
+      font-size: 32px;
+    }
   }
 
   h2 {
     font-size: 40px;
     margin-top: @margin-lg;
     margin-bottom: @margin-md;
+    @media only screen and (max-width: @screen-sm-max) {
+      font-size: 22px;
+    }
   }
 
   h3 {
     font-size: 20px;
+    @media only screen and (max-width: @screen-sm-max) {
+      font-size: 16px;
+    }
   }
 
   h4 {
     font-size: 16px;
+    @media only screen and (max-width: @screen-sm-max) {
+      font-size: 14px;
+    }
   }
 
   h5 {
     font-size: 14px;
     font-weight: 700;
-
+    @media only screen and (max-width: @screen-sm-max) {
+      font-size: 12px;
+    }
     &.step {
       font-weight: 600;
       letter-spacing: 2.5px;
@@ -61,6 +73,9 @@ html {
 
   div.ant-typography {
     font-size: 16px;
+    @media only screen and (max-width: @screen-sm-max) {
+      font-size: 14px;
+    }
   }
 
   div.ant-typography.content-a {
@@ -152,6 +167,10 @@ html {
   }
 
   .ant-layout-footer {
+    margin: 0 80px;
+    @media only screen and (max-width: @screen-md) {
+      margin: 0 20px;
+    }
     .ant-btn {
       span {
         color: white;
@@ -172,6 +191,12 @@ html {
   }
 
   .section-container {
-    padding: @padding-container 0;
+    padding: 46px 0;
+    @media (min-width: @screen-xs + 1) and (max-width: @screen-lg) {
+      padding: 56px 0;
+    }
+    @media only screen and (min-width: @screen-lg ) {
+      padding: @padding-container 0;
+    }
   }
 }
