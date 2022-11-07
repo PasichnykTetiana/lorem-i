@@ -13,13 +13,19 @@ class UserService {
             throw new Error(`User with this email (${email}) address already exists)`)
         }
         const hashPassword = await bcrypt.hash(password, 3)
-        const activationLink = uuid.v4()
-        const user = await UserModel.create({email, password: activationLink})
-        await mailService.sendActivationMail(email, activationLink)
+        const activationLink = uuid.v4() //password caching
 
-        const userDto = new UserDto(user);
+        const user = await UserModel.create({email, password: activationLink})
+        await mailService.sendActivationMail(email, activationLink) //save user at db
+
+        const userDto = new UserDto(user); // send e-mail for activation
         const tokens = tokenService.generateTokens({...userDto})
         await tokenService.saveToken(userDto.id, tokens.refreshToken); //save to db
+
+        return {
+            ...tokens,
+            user: userDto
+        }
     }
 
 }
