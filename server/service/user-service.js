@@ -15,7 +15,7 @@ class UserService {
         const hashPassword = await bcrypt.hash(password, 3)
         const activationLink = uuid.v4() //password caching
 
-        const user = await UserModel.create({email, password: activationLink})
+        const user = await UserModel.create({email, password: hashPassword, activationLink})
         await mailService.sendActivationMail(email, activationLink) //save user at db
 
         const userDto = new UserDto(user); // send e-mail for activation
