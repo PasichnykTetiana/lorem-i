@@ -16,7 +16,7 @@ class UserService {
         const activationLink = uuid.v4() //password caching
 
         const user = await UserModel.create({email, password: hashPassword, activationLink})
-        await mailService.sendActivationMail(email, activationLink) //save user at db
+        await mailService.sendActivationMail(email, `${process.env.API_URL}/api/activate/${activationLink}`, activationLink) //save user at db
 
         const userDto = new UserDto(user); // send e-mail for activation
         const tokens = tokenService.generateTokens({...userDto})
@@ -26,8 +26,12 @@ class UserService {
             ...tokens,
             user: userDto
         }
-    }
 
+
+    }
+    async activate(activationLink) {
+        const user = await UserModel.findOne({activationLink})
+    }
 }
 
 module.exports = new UserService()
