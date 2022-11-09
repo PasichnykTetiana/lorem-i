@@ -2,6 +2,7 @@ import './index.less'
 import { Carousel } from "antd";
 import { useBreakpoints } from '../../components/screen'
 import { FC } from 'react'
+import { DownOutlined  } from '@ant-design/icons';
 
 import { HeroSection } from '../../components/section'
 import SectionContainer from "../../components/section/SectionContainer";
@@ -42,9 +43,9 @@ const Home: FC = () => {
         <Carousel
           effect="fade"
           style={{maxWidth: '100vw'}}
-          dots={!isMD ? {className: 'carousel'} : false}
+          dots={!isMD && true}
           arrows={isMD && true}
-          prevArrow={<SvgIcon fill={'#b6acf0'} type={'arrowPrev'}/>}
+          prevArrow={<SvgIcon  fill={'#b6acf0'} type={'arrowPrev'}/>}
           nextArrow={<SvgIcon fill={'#b6acf0'} type={'arrowNext'} />}
         >
           {hero.map((it, i) => (
