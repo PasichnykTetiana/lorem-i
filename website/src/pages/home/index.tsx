@@ -1,10 +1,12 @@
 import './index.less'
 import { Carousel } from "antd";
 import { useBreakpoints } from '../../components/screen'
-import { FC } from 'react'
+import { FC, useState, useEffect, useContext,  } from 'react'
+import axios from 'axios';
 
 import { HeroSection } from '../../components/section'
 import SectionContainer from "../../components/section/SectionContainer";
+import {Context} from '../../main';
 import { Card, Bats } from './sections/index'
 import jack from './img/jack.png'
 import img from './img/images.png'
@@ -14,6 +16,7 @@ import {SvgIcon} from "../../components/icon/SvgIcon";
 
 const Home: FC = () => {
   const { isMD } = useBreakpoints()
+  const {store} = useContext(Context);
 
   const hero = [
     {
@@ -57,6 +60,7 @@ const Home: FC = () => {
           ))}
 
         </Carousel>
+        <h1 style={{backgroundColor: 'red'}}>{store.isAuth ? `Пользователь авторизован` : 'АВТОРИЗУЙТЕСЬ'}</h1>
       </SectionContainer>
           <Card  />
       <SectionContainer theme={'grey'}>
