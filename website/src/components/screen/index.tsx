@@ -20,7 +20,7 @@ const sizes: SizeMap = {
   XXL: Breakpoints.XXL,
 } as const
 
-type DeviceType = 'mobile' | 'desktop' | 'tablet' | 'MD'
+type DeviceType = 'mobile' | 'desktop' | 'tablet' | 'MD' | 'SM'
 
 type BreakpointHook = { [key in `is${Capitalize<DeviceType>}`]: boolean } & { sizes: SizeMap }
 
@@ -30,6 +30,7 @@ function useBreakpoints(): BreakpointHook {
     isDesktop: useMediaQuery({ minWidth: Breakpoints.LG }),
     isTablet: useMediaQuery({ minWidth: Breakpoints.XS + 1, maxWidth: Breakpoints.LG - 1 }),
     isMD: useMediaQuery({ maxWidth: Breakpoints.MD - 1 }),
+    isSM: useMediaQuery({ maxWidth: Breakpoints.SM - 1 }),
     sizes,
   }
 }

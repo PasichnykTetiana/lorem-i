@@ -8,7 +8,7 @@ const UserDto = require('../dtos/user-dto');
 const ApiError = require('../exceptions/api-error')
 
 class UserService {
-    async registration(email, password){
+    async registration(email, password, username){
         const candidate = await UserModel.findOne({email})
         if(candidate){
             throw ApiError.BadRequest(`User with this email (${email}) address already exists`)
@@ -16,7 +16,7 @@ class UserService {
         const hashPassword = await bcrypt.hash(password, 3)
         const activationLink = uuid.v4() //password caching
 
-        const user = await UserModel.create({email, password: hashPassword, activationLink})
+        const user = await UserModel.create({email, username, password: hashPassword, activationLink})
         await mailService.sendActivationMail(email, `${process.env.API_URL}/api/activate/${activationLink}`, activationLink) //save user at db
 
         const userDto = new UserDto(user); // send e-mail for activation
@@ -59,25 +59,25 @@ class UserService {
     async logout(refreshToken){
         const token = await tokenService.removeToken(refreshToken)
         return token;
+
     }
-    async refresh(refreshToken){
-        if(!refreshToken){
-            throw ApiError.UnauthorizedError()
+    async refresh(refreshToken) {
+
+        if (!refreshToken) {
+            throw ApiError.UnauthorizedError();
         }
-        const userData = tokenService.validateRefreshToken(refreshToken)
-        const tokenFromDb = await tokenService.findToken(refreshToken)
-        if(!userData || !tokenFromDb){
+
+        const userData = tokenService.validateRefreshToken(refreshToken);
+        const tokenFromDb = await tokenService.findToken(refreshToken);
+        if (!userData || !tokenFromDb) {
             throw ApiError.UnauthorizedError();
         }
         const user = await UserModel.findById(userData.id);
-        const userDto = new UserDto(user)
-        const tokens = tokenService.generateTokens({...userDto})
-        await tokenService.saveToken(userDto.id, tokens.refreshToken); //save to db
+        const userDto = new UserDto(user);
+        const tokens = tokenService.generateTokens({...userDto});
 
-        return {
-            ...tokens,
-            user: userDto
-        }
+        await tokenService.saveToken(userDto.id, tokens.refreshToken);
+        return {...tokens, user: userDto, 'test': refreshToken}
     }
     async getAllUsers() {
         const users = await UserModel.find()

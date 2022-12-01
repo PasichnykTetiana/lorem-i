@@ -1,84 +1,78 @@
-import {FC, useEffect, useState,} from 'react'
+import {FC, useContext, useEffect, useState,} from 'react'
 import './index.less'
-import { Button, Col, Form, Input, Row, Typography } from 'antd'
-import axios from "axios";
-import { registration } from "../../services/AuthServices";
+import { Button, Form, Input} from 'antd'
 import { NavLink } from "react-router-dom";
-import $api from "../../http";
+import {Context} from "../../components/app";
+import {observer} from "mobx-react-lite";
+import SectionContainer from "../../components/section/SectionContainer";
+import {useBreakpoints} from "../../components/screen";
 
 const Auth: FC = () => {
     const [form] = Form.useForm()
-    const [appState, setAppState]= useState();
-    const [registered, setRegistered] = useState<boolean>(false);
+    const {store} = useContext(Context);
+    const { isSM } = useBreakpoints()
 
-
-    async function getSongs(data: any): Promise<any> {
-        const url = "http://localhost:5000/api/registration";
-        const response = await  axios.post<any>(url, data);
-        console.log(response.data)
-        return response.data;
+    const onFinish = (data: Data) => {
+        store.registration(data)
+        if (localStorage.getItem('token')) {
+            store.checkAuth()
+        }
     }
 
-
-
-    const onFinish = (data: AuthResponse) => {
-        (async () => {
-            try {
-            const response = await registration(data);
-                setRegistered(true)
-            console.log(response, 'sdfdddddddddddddddddd')
-            localStorage.setItem('token', response.data.accessToken);
-        } catch (e) {
-            console.log('e.response?.data?.message');
-        } })();
-    }
+    useEffect(() => {
+        if (localStorage.getItem('token')) {
+            store.checkAuth()
+        }
+    }, [])
 
     return (
-        !registered ?<Form
-            name="basic"
-            labelCol={{ span: 8 }}
-            wrapperCol={{ span: 16 }}
+        <SectionContainer >
+            {!store.isAuth ? <Form
+            name="data"
+            labelCol={{ span: 8}}
+            wrapperCol={{ span: 8  }}
             initialValues={{ remember: true }}
             onFinish={onFinish}
+            form={form}
             autoComplete="off"
+            className={'contact-wrapper'}
         >
-            <div>Регистрация</div>
             <Form.Item
-                label="Username"
+                label="Email"
                 name="email"
-
-                rules={[{ required: true, message: 'Please input your username!' }]}
+                rules={[{ required: true, type: 'email', message: 'Please input your email!' }]}
             >
                 <Input  />
             </Form.Item>
-
+            <Form.Item
+                label="Username"
+                name="username"
+                rules={[{ required: true, type: 'string', message: 'Please input your username!' }]}
+            >
+                <Input  />
+            </Form.Item>
             <Form.Item
                 label="Password"
                 name="password"
-                rules={[{ required: true, message: 'Please input your password!' }]}
+                rules={[{ required: true, type: 'string' , message: 'Please input your password!' }]}
             >
                 <Input.Password/>
             </Form.Item>
-
-            {/*<Form.Item name="remember" valuePropName="checked" wrapperCol={{ offset: 8, span: 16 }}>*/}
-            {/*    <Checkbox>Remember me</Checkbox>*/}
-            {/*</Form.Item>*/}
-
-            <Form.Item wrapperCol={{ offset: 8, span: 16 }}>
+            <Form.Item wrapperCol={{ offset: !isSM ? 8 : 0, span: 16 }}>
                 <Button type="primary" htmlType="submit">
-                    Submit
+                    Send
                 </Button>
             </Form.Item>
-        </Form>: <div>подтвердите
-
+        </Form> :
             <NavLink
-                to="/login"
+                to="/"
             >
-               login
-            </NavLink>
-
-        </div>
+                <Button type="primary" htmlType="submit">
+                    Homepage
+                </Button>
+            </NavLink>}
+        </SectionContainer>
     )
 }
 
-export { Auth as default }
+export default observer(Auth)

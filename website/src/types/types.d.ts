@@ -21,7 +21,14 @@ type HomePage = {
 type User = {
   email: Scalars['String'];
   isActivated: Scalars['String'];
+  username: Scalars['String'];
   id: Scalars['String'];
+}
+
+type Data = {
+  email: Scalars['String'];
+  password: Scalars['String'];
+  username: Scalars['String'];
 }
 
 
@@ -30,4 +37,5 @@ type AuthResponse = {
   refreshToken: Scalars['String'];
   user: User;
 }
+
 

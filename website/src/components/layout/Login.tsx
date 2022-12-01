@@ -3,25 +3,22 @@ import './index.less'
 import { Button, Col, Form, Input, Row, Typography } from 'antd'
 import axios from "axios";
 import { useContext} from 'react';
-import { login } from "../../services/AuthServices";
+import {login, users} from "../../services/AuthServices";
 import {AxiosResponse} from "axios";
 import $api from "../../http";
 //import {Context} from "../../main"
-import {Context} from "../../components/app"
+import {Context} from "../app"
+import {observer} from "mobx-react-lite";
+import {toJS} from "mobx";
 
 const Login: FC = () => {
     const [form] = Form.useForm()
     const [appState, setAppState]= useState();
-    const [songs, setSongs] = useState<any>([]);
+    const [user, setUser] = useState<any>({});
     const {store} = useContext(Context);
 
-
     const onFinish = (data: Data) => {
-    store.login(data)
-        // console.log(store.checkAuth())
-        // store.checkAuth()
-        console.log(store.isAuth)
-
+        store.login(data)
     }
 
     return (
@@ -34,7 +31,7 @@ const Login: FC = () => {
             autoComplete="off"
         >
             <Form.Item
-                label="Username"
+                label="Email"
                 name="email"
                 rules={[{ required: true, message: 'Please input your username!' }]}
             >
@@ -46,15 +43,15 @@ const Login: FC = () => {
                 name="password"
                 rules={[{ required: true, message: 'Please input your password!' }]}
             >
-            <Input.Password/>
+                <Input.Password/>
             </Form.Item>
             <Form.Item wrapperCol={{ offset: 8, span: 16 }}>
                 <Button type="primary" htmlType="submit">
-                    Submit
+                    Log in
                 </Button>
             </Form.Item>
         </Form>
     )
 }
 
-export { Login as default }
+export default observer(Login)

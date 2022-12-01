@@ -17,9 +17,9 @@ const routes: RouteObject[] = [
         element: <Home />,
         index: true,
       },
-      {
-        path: 'login',
-        element: <Login />},
+      // {
+      //   path: 'login',
+      //   element: <Login />},
       {
         path: 'registration',
         element: <Auth />,

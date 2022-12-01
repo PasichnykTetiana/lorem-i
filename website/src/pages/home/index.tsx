@@ -1,22 +1,27 @@
 import './index.less'
-import { Carousel } from "antd";
+import {Button, Carousel} from "antd";
 import { useBreakpoints } from '../../components/screen'
 import { FC, useState, useEffect, useContext,  } from 'react'
-import axios from 'axios';
-
 import { HeroSection } from '../../components/section'
 import SectionContainer from "../../components/section/SectionContainer";
-import {Context} from '../../main';
+import {Context} from "../../components/app"
 import { Card, Bats } from './sections/index'
 import jack from './img/jack.png'
 import img from './img/images.png'
 import img2 from './img/images2.png'
 import {SvgIcon} from "../../components/icon/SvgIcon";
-
+import {observer} from "mobx-react-lite";
+import {users} from "../../services/AuthServices";
 
 const Home: FC = () => {
   const { isMD } = useBreakpoints()
   const {store} = useContext(Context);
+
+  useEffect(() => {
+      if (localStorage.getItem('token')) {
+          store.checkAuth()
+      }
+  }, [])
 
   const hero = [
     {
@@ -60,7 +65,6 @@ const Home: FC = () => {
           ))}
 
         </Carousel>
-        <h1 style={{backgroundColor: 'red'}}>{store.isAuth ? `Пользователь авторизован` : 'АВТОРИЗУЙТЕСЬ'}</h1>
       </SectionContainer>
           <Card  />
       <SectionContainer theme={'grey'}>
@@ -70,4 +74,4 @@ const Home: FC = () => {
   )
 }
 
-export { Home as default }
+export default observer(Home)

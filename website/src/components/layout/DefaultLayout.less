@@ -11,9 +11,24 @@ html {
   }
 }
 
+.ant-dropdown-menu {
+  background-color: @layout-body-background;
+}
+
+.ant-dropdown-menu-item:hover, .ant-dropdown-menu-submenu-title:hover, .ant-dropdown-menu-item.ant-dropdown-menu-item-active, .ant-dropdown-menu-item.ant-dropdown-menu-submenu-title-active, .ant-dropdown-menu-submenu-title.ant-dropdown-menu-item-active, .ant-dropdown-menu-submenu-title.ant-dropdown-menu-submenu-title-active {
+  opacity: 0.95;
+  background-color: transparent;
+}
+
+.ant-form-item-control-input-content {
+  input {
+    color: black;
+  }
+}
+
 #root {
   width: 100%;
-//  overflow: hidden;
+  //  overflow: hidden;
 
 
   h1,
@@ -63,6 +78,7 @@ html {
     @media only screen and (max-width: @screen-sm-max) {
       font-size: 12px;
     }
+
     &.step {
       font-weight: 600;
       letter-spacing: 2.5px;
@@ -104,6 +120,7 @@ html {
     @media only screen and (max-width: @screen-md) {
       margin: 20px 20px;
     }
+
     .triangle {
       margin-left: 12px;
       margin-top: 2px;
@@ -111,6 +128,7 @@ html {
       border: 5px solid transparent;
       border-top: 5px solid black;
     }
+
 
     .ant-menu-submenu-title {
       h5 {
@@ -173,6 +191,7 @@ html {
     @media only screen and (max-width: @screen-md) {
       margin: 0 20px;
     }
+
     .ant-btn {
       span {
         color: white;
