@@ -1,0 +1,223 @@
+@import 'src/components/app/index';
+
+html {
+  scroll-behavior: smooth;
+
+  .submenu {
+    .ant-typography {
+      font-size: 15px;
+
+    }
+  }
+}
+
+.ant-dropdown-menu {
+  background-color: @layout-body-background;
+}
+
+.ant-dropdown-menu-item:hover, .ant-dropdown-menu-submenu-title:hover, .ant-dropdown-menu-item.ant-dropdown-menu-item-active, .ant-dropdown-menu-item.ant-dropdown-menu-submenu-title-active, .ant-dropdown-menu-submenu-title.ant-dropdown-menu-item-active, .ant-dropdown-menu-submenu-title.ant-dropdown-menu-submenu-title-active {
+  opacity: 0.95;
+  background-color: transparent;
+}
+
+.ant-form-item-control-input-content {
+  input {
+    color: black;
+  }
+}
+
+#root {
+  width: 100%;
+  //  overflow: hidden;
+
+
+  h1,
+  h2,
+  h3,
+  h4,
+  h5 {
+    &.ant-typography {
+      font-weight: 700;
+      font-family: @headings-font-family;
+    }
+  }
+
+  h1 {
+    font-size: 56px;
+    @media only screen and (max-width: @screen-xs) {
+      font-size: 32px;
+    }
+  }
+
+  h2 {
+    font-size: 40px;
+    margin-top: @margin-lg;
+    margin-bottom: @margin-md;
+    @media only screen and (max-width: @screen-sm-max) {
+      font-size: 22px;
+    }
+  }
+
+  h3 {
+    font-size: 20px;
+    @media only screen and (max-width: @screen-sm-max) {
+      font-size: 16px;
+    }
+  }
+
+  h4 {
+    font-size: 16px;
+    @media only screen and (max-width: @screen-sm-max) {
+      font-size: 14px;
+    }
+  }
+
+  h5 {
+    font-size: 14px;
+    font-weight: 700;
+    @media only screen and (max-width: @screen-sm-max) {
+      font-size: 12px;
+    }
+
+    &.step {
+      font-weight: 600;
+      letter-spacing: 2.5px;
+      color: #376358;
+      text-transform: uppercase;
+    }
+  }
+
+  div.ant-typography {
+    font-size: 16px;
+    @media only screen and (max-width: @screen-sm-max) {
+      font-size: 14px;
+    }
+  }
+
+  div.ant-typography.content-a {
+    text-transform: uppercase;
+    font-size: 11px;
+    font-weight: 600;
+  }
+
+  .ant-menu-submenu-active {
+    .triangle,
+    svg {
+      transition: 0.5s;
+      transform: rotate(180deg);
+      border-top: 5px solid @color-green;
+      margin-bottom: 8px;
+    }
+
+    h5 {
+      color: @color-green;
+    }
+  }
+
+  header {
+    margin: 20px @layout-margin;
+    text-transform: uppercase;
+    @media only screen and (max-width: @screen-md) {
+      margin: 20px 20px;
+    }
+
+    .triangle {
+      margin-left: 12px;
+      margin-top: 2px;
+      margin-bottom: -4px;
+      border: 5px solid transparent;
+      border-top: 5px solid black;
+    }
+
+
+    .ant-menu-submenu-title {
+      h5 {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+
+        svg {
+        }
+      }
+    }
+
+    .ant-btn-ghost {
+      height: 48px;
+      width: 166px;
+      border: 1px solid @color-green;
+      margin-left: 40px;
+      color: @color-green;
+
+      &:hover {
+        color: white;
+      }
+    }
+
+    ul {
+      width: 100%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .buttons {
+      display: flex;
+      justify-content: right;
+    }
+
+    .ant-col {
+      display: flex;
+      align-items: center;
+    }
+  }
+
+  .ant-btn {
+    span {
+      color: @layout-body-background;
+    }
+
+    &.ant-btn-primary {
+      background-color: @color-green;
+      border: none;
+    }
+
+    &.ant-btn-lg {
+      height: 48px;
+    }
+  }
+
+  .ant-layout-footer {
+    margin: 0 80px;
+    @media only screen and (max-width: @screen-md) {
+      margin: 0 20px;
+    }
+
+    .ant-btn {
+      span {
+        color: white;
+      }
+    }
+
+    h4 {
+      font-weight: normal;
+      color: white;
+      opacity: 70%;
+    }
+
+    .social {
+      display: flex;
+      justify-content: space-between;
+      margin-top: auto;
+    }
+  }
+
+  .section-container {
+    padding: 46px 0;
+    @media (min-width: @screen-xs + 1) and (max-width: @screen-lg) {
+      padding: 56px 0;
+    }
+    @media only screen and (min-width: @screen-lg ) {
+      padding: @padding-container 0;
+    }
+  }
+}
