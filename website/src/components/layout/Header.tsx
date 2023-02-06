@@ -1,15 +1,13 @@
 import {Button, Col, Row, Typography} from 'antd'
-import {FC, useContext, useEffect, useState} from 'react'
+import {FC, useContext, useState} from 'react'
 import { Link, NavLink } from 'react-router-dom'
 import img from './img/logo.png'
 import { Dropdown, Space } from 'antd';
 import type { MenuProps } from 'antd';
-import { toJS } from 'mobx';
 import {observer} from "mobx-react-lite";
 
 import  Login  from './Login'
 import {Context} from "../app";
-import {users} from "../../services/AuthServices";
 
 const Header: FC = () => {
   const [open, setOpen] = useState(false);
