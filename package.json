@@ -9,9 +9,14 @@
   "workspaces": [
     "packages/*"
   ],
+  "dependencies": {
+    "prettier": "^2.8.3"
+  },
   "scripts": {
     "start": "concurrently 'yarn:start:server' 'yarn:start:website'",
     "start:server": "yarn workspace @lorem-i/server run dev",
-    "start:website": "yarn workspace @lorem-i/website run start"
+    "start:website": "yarn workspace @lorem-i/website run start",
+    "fix": "yarn lint:format --write packages/*/src",
+    "lint:format": "node_modules/.bin/prettier"
   }
 }
