@@ -16,12 +16,12 @@ import {users} from "../../services/AuthServices";
 const Home: FC = () => {
   const { isMD } = useBreakpoints()
   const {store} = useContext(Context);
-
-  useEffect(() => {
-      if (localStorage.getItem('token')) {
-          store.checkAuth()
-      }
-  }, [])
+  //
+  // useEffect(() => {
+  //     if (localStorage.getItem('token')) {
+  //         store.checkAuth()
+  //     }
+  // }, [])
 
   const hero = [
     {

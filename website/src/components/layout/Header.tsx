@@ -19,15 +19,6 @@ const Header: FC = () => {
     setOpen(flag);
   };
 
-
-  useEffect(() => {
-        if (localStorage.getItem('token')) {
-            store.checkAuth()
-          console.log(store.userName, 'username 3')
-        }
-
-  }, [])
-
   const items: MenuProps['items'] = [
     {
       label: <Login />,
@@ -43,9 +34,11 @@ const Header: FC = () => {
       key: '1',
     },
   ];
+
   return (
     <>
       <Row wrap={false} align={'middle'} justify={'space-between'}>
+
         <Col span={6}>
           <Link to={'/'}>
             <img width={200} src={img} />
@@ -78,4 +71,4 @@ const Header: FC = () => {
   )
 }
 
-export  default observer(Header)
+export default observer(Header)

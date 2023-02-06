@@ -40,6 +40,7 @@ class UserService {
     }
     async login(email, password){
         const user = await UserModel.findOne({email})
+
         if(!user){
             throw ApiError.BadRequest('User is not found')
         }
@@ -49,6 +50,7 @@ class UserService {
         }
         const userDto = new UserDto(user)
         const tokens = tokenService.generateTokens({...userDto})
+
         await tokenService.saveToken(userDto.id, tokens.refreshToken); //save to db
 
         return {
@@ -69,15 +71,21 @@ class UserService {
 
         const userData = tokenService.validateRefreshToken(refreshToken);
         const tokenFromDb = await tokenService.findToken(refreshToken);
+
         if (!userData || !tokenFromDb) {
             throw ApiError.UnauthorizedError();
+
         }
+
         const user = await UserModel.findById(userData.id);
         const userDto = new UserDto(user);
         const tokens = tokenService.generateTokens({...userDto});
 
         await tokenService.saveToken(userDto.id, tokens.refreshToken);
-        return {...tokens, user: userDto, 'test': refreshToken}
+
+      if(tokenFromDb){
+          return {...tokens, user: userDto} //*
+      }
     }
     async getAllUsers() {
         const users = await UserModel.find()
