@@ -4,6 +4,8 @@ import DefaultLayout  from '../components/layout/DefaultLayout'
 
 
 const Home = lazy<FC>(() => import('./home'))
+const About = lazy<FC>(() => import('./about'))
+
 const Auth = lazy<FC>(() => import('./registration'))
 const Login = lazy<FC>(() => import('./login'))
 const NotFound = lazy<FC>(() => import('./not-found'))
@@ -16,6 +18,10 @@ const routes: RouteObject[] = [
       {
         element: <Home />,
         index: true,
+      },
+      {
+        path: 'about',
+        element: <About />,
       },
       // {
       //   path: 'login',

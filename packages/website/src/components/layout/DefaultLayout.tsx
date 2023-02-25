@@ -1,7 +1,7 @@
 import './DefaultLayout.less'
 
 import {Layout} from 'antd'
-import {FC, useEffect, useContext, Suspense} from 'react'
+import {FC, useEffect, useState, useContext, Suspense} from 'react'
 import { Outlet } from 'react-router-dom'
 import { Loader } from './Loader'
 import {observer} from "mobx-react-lite";

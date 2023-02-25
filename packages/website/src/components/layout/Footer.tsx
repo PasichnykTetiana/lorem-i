@@ -10,7 +10,7 @@ const Footer: FC = () => {
   const { isMobile } = useBreakpoints()
 
   const items = [
-    { links: [{name: 'none', link: '/'}, {name: 'none', link: '/'}, {name: 'none', link: '/'},], title: 'Sitemap' },
+    { links: [{name: 'About us', link: '/about'}, {name: 'none', link: '/'}, {name: 'none', link: '/'},], title: 'Sitemap' },
     { links: [{name: 'none', link: '/'}, {name: 'none', link: '/'}, {name: 'none', link: '/'},], title: 'Social Media' },
     { links: [{name: 'none', link: '/'}, {name: 'none', link: '/'}, {name: 'none', link: '/'},], title: 'Policies' },
   ]

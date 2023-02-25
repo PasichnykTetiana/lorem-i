@@ -4,9 +4,11 @@ import { ReactComponent as Pawn } from './images/pawn.svg'
 import { ReactComponent as Queen } from './images/queen.svg'
 import { ReactComponent as ArrowNext } from './images/Arrow.svg'
 import { ReactComponent as ArrowPrev } from './images/ArrowP.svg'
+import { ReactComponent as Dot } from './images/Dot.svg'
 
 const icons: { [key: string]: FC<SVGProps<SVGSVGElement>> } = {
     pawn: Pawn,
+    dot: Dot,
     queen: Queen,
     arrowNext: ArrowNext,
     arrowPrev: ArrowPrev
