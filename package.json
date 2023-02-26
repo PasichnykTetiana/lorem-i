@@ -10,7 +10,13 @@
     "packages/*"
   ],
   "dependencies": {
-    "prettier": "^2.8.3"
+    "@typescript-eslint/eslint-plugin": "^5.0.0",
+    "eslint-config-standard-with-typescript": "^34.0.0",
+    "eslint-plugin-import": "^2.25.2",
+    "eslint-plugin-n": "^15.0.0",
+    "eslint-plugin-promise": "^6.0.0",
+    "eslint-plugin-react": "^7.32.2",
+    "typescript": "*"
   },
   "scripts": {
     "start": "concurrently 'yarn:start:server' 'yarn:start:website'",
@@ -18,5 +24,8 @@
     "start:website": "yarn workspace @lorem-i/website run start",
     "fix": "yarn lint:format --write packages/*/src",
     "lint:format": "node_modules/.bin/prettier"
+  },
+  "devDependencies": {
+    "eslint": "^8.0.1"
   }
 }
