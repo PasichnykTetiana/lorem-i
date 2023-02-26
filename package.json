@@ -22,8 +22,9 @@
     "start": "concurrently 'yarn:start:server' 'yarn:start:website'",
     "start:server": "yarn workspace @lorem-i/server run dev",
     "start:website": "yarn workspace @lorem-i/website run start",
-    "fix": "yarn lint:format --write packages/*/src",
-    "lint:format": "node_modules/.bin/prettier"
+    "fix": "yarn lint:scripts . --fix",
+    "lint:format": "node_modules/.bin/prettier",
+    "lint:scripts": "node_modules/.bin/eslint"
   },
   "devDependencies": {
     "eslint": "^8.0.1"
