@@ -19,23 +19,28 @@ type HomePage = {
 }
 
 type User = {
-  email: Scalars['String'];
-  isActivated: Scalars['String'];
-  username: Scalars['String'];
-  id: Scalars['String'];
+  email: Scalars['String']
+  isActivated: Scalars['String']
+  username: Scalars['String']
+  id: Scalars['String']
 }
 
 type Data = {
-  email: Scalars['String'];
-  password: Scalars['String'];
-  username: Scalars['String'];
+  email: Scalars['String']
+  password: Scalars['String']
+  username: Scalars['String']
 }
-
 
 type AuthResponse = {
-  accessToken: Scalars['String'];
-  refreshToken: Scalars['String'];
-  user: User;
+  accessToken: Scalars['String']
+  refreshToken: Scalars['String']
+  user: User
 }
+ ///
 
-
+type Person = {
+  _id: string;
+  name: string;
+  occupation: string;
+  photo: string;
+}

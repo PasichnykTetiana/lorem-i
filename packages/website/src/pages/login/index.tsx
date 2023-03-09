@@ -1,30 +1,28 @@
-import {FC, useEffect, useState,} from 'react'
+import { type FC, useEffect, useState } from 'react'
 import './index.less'
 import { Button, Col, Form, Input, Row, Typography } from 'antd'
-import axios from "axios";
-import { useContext} from 'react';
-import { login } from "../../services/AuthServices";
-import {AxiosResponse} from "axios";
-import $api from "../../http";
-//import {Context} from "../../main"
-import {Context} from "../../components/app"
+import axios, { AxiosResponse } from 'axios'
+import { useContext } from 'react'
+import { login } from '../../services/AuthServices'
+
+import $api from '../../http'
+// import {Context} from "../../main"
+import { Context } from '../../components/app'
 
 const Login: FC = () => {
-    const [form] = Form.useForm()
-    const [appState, setAppState]= useState();
-    const [songs, setSongs] = useState<any>([]);
-    const {store} = useContext(Context);
+  const [form] = Form.useForm()
+  const [appState, setAppState] = useState()
+  const [songs, setSongs] = useState<any>([])
+  const { store } = useContext(Context)
 
-
-    const onFinish = (data: Data) => {
+  const onFinish = (data: Data) => {
     store.login(data)
-        // console.log(store.checkAuth())
-        // store.checkAuth()
-        console.log(store.isAuth)
+    // console.log(store.checkAuth())
+    // store.checkAuth()
+    console.log(store.isAuth)
+  }
 
-    }
-
-    return (
+  return (
         <Form
             name="basic"
             labelCol={{ span: 8 }}
@@ -38,7 +36,7 @@ const Login: FC = () => {
                 name="email"
                 rules={[{ required: true, message: 'Please input your username!' }]}
             >
-                <Input  />
+                <Input />
             </Form.Item>
 
             <Form.Item
@@ -54,7 +52,7 @@ const Login: FC = () => {
                 </Button>
             </Form.Item>
         </Form>
-    )
+  )
 }
 
 export { Login as default }

@@ -1,7 +1,7 @@
 import './Content.less'
 
 import { Layout } from 'antd'
-import { FC, PropsWithChildren } from 'react'
+import { type FC, type PropsWithChildren } from 'react'
 
 type ContentProps = { fixed: boolean }
 

@@ -1,36 +1,37 @@
-import {FC, useContext, useEffect, useState,} from 'react'
+import { type FC, useContext, useEffect, useState } from 'react'
 import './index.less'
-import { Button, Form, Input} from 'antd'
-import { NavLink } from "react-router-dom";
-import {Context} from "../../components/app";
-import {observer} from "mobx-react-lite";
-import SectionContainer from "../../components/section/SectionContainer";
-import {useBreakpoints} from "../../components/screen";
+import { Button, Form, Input } from 'antd'
+import { NavLink } from 'react-router-dom'
+import { Context } from '../../components/app'
+import { observer } from 'mobx-react-lite'
+import SectionContainer from '../../components/section/SectionContainer'
+import { useBreakpoints } from '../../components/screen'
 
 const Auth: FC = () => {
-    const [form] = Form.useForm()
-    const {store} = useContext(Context);
-    const { isSM } = useBreakpoints()
+  const [form] = Form.useForm()
+  const { store } = useContext(Context)
+  const { isSM } = useBreakpoints()
 
-    const onFinish = (data: Data) => {
-        store.registration(data)
-        if (localStorage.getItem('token')) {
-            store.checkAuth()
-        }
+  const onFinish = (data: Data) => {
+    store.registration(data)
+    if (localStorage.getItem('token')) {
+      store.checkAuth()
     }
+  }
 
-    useEffect(() => {
-        if (localStorage.getItem('token')) {
-            store.checkAuth()
-        }
-    }, [])
+  useEffect(() => {
+    if (localStorage.getItem('token')) {
+      store.checkAuth()
+    }
+  }, [])
 
-    return (
+  return (
         <SectionContainer >
-            {!store.isAuth ? <Form
+            {!store.isAuth
+              ? <Form
             name="data"
-            labelCol={{ span: 8}}
-            wrapperCol={{ span: 8  }}
+            labelCol={{ span: 8 }}
+            wrapperCol={{ span: 8 }}
             initialValues={{ remember: true }}
             onFinish={onFinish}
             form={form}
@@ -42,19 +43,19 @@ const Auth: FC = () => {
                 name="email"
                 rules={[{ required: true, type: 'email', message: 'Please input your email!' }]}
             >
-                <Input  />
+                <Input />
             </Form.Item>
             <Form.Item
                 label="Username"
                 name="username"
                 rules={[{ required: true, type: 'string', message: 'Please input your username!' }]}
             >
-                <Input  />
+                <Input />
             </Form.Item>
             <Form.Item
                 label="Password"
                 name="password"
-                rules={[{ required: true, type: 'string' , message: 'Please input your password!' }]}
+                rules={[{ required: true, type: 'string', message: 'Please input your password!' }]}
             >
                 <Input.Password/>
             </Form.Item>
@@ -63,8 +64,8 @@ const Auth: FC = () => {
                     Send
                 </Button>
             </Form.Item>
-        </Form> :
-            <NavLink
+        </Form>
+              : <NavLink
                 to="/"
             >
                 <Button type="primary" htmlType="submit">
@@ -72,7 +73,7 @@ const Auth: FC = () => {
                 </Button>
             </NavLink>}
         </SectionContainer>
-    )
+  )
 }
 
 export default observer(Auth)

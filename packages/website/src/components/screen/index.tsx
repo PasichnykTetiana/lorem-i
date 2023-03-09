@@ -5,8 +5,9 @@ enum Breakpoints {
   SM = 576,
   MD = 768,
   LG = 992,
-  XL = 1200,
-  XXL = 1600,
+  XL = 1024,
+  XXL = 1200,
+  XXXL=1600,
 }
 
 type SizeMap = Readonly<{ [key in keyof typeof Breakpoints]: Breakpoints }>
@@ -18,20 +19,22 @@ const sizes: SizeMap = {
   LG: Breakpoints.LG,
   XL: Breakpoints.XL,
   XXL: Breakpoints.XXL,
+  XXXL: Breakpoints.XXXL
 } as const
 
-type DeviceType = 'mobile' | 'desktop' | 'tablet' | 'MD' | 'SM'
+type DeviceType = 'mobile' | 'desktop' | 'tablet' | 'MD' | 'XL' | 'SM'
 
 type BreakpointHook = { [key in `is${Capitalize<DeviceType>}`]: boolean } & { sizes: SizeMap }
 
-function useBreakpoints(): BreakpointHook {
+function useBreakpoints (): BreakpointHook {
   return {
     isMobile: useMediaQuery({ maxWidth: Breakpoints.XS }),
     isDesktop: useMediaQuery({ minWidth: Breakpoints.LG }),
-    isTablet: useMediaQuery({ minWidth: Breakpoints.XS + 1, maxWidth: Breakpoints.LG - 1 }),
+    isTablet: useMediaQuery({ minWidth: Breakpoints.XS + 1, maxWidth: Breakpoints.MD - 1 }),
     isMD: useMediaQuery({ maxWidth: Breakpoints.MD - 1 }),
     isSM: useMediaQuery({ maxWidth: Breakpoints.SM - 1 }),
-    sizes,
+    isXL: useMediaQuery({ maxWidth: Breakpoints.XL - 1 }),
+    sizes
   }
 }
 

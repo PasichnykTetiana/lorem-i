@@ -1,16 +1,16 @@
 import './Bats.less'
 import ScrollAnimation from 'react-animate-on-scroll'
 
-import {Button, Col, Row, Typography} from 'antd'
-import {FC} from 'react'
+import { Button, Col, Row, Typography } from 'antd'
+import { type FC } from 'react'
 
 import img from './img/bats.png'
-import {useBreakpoints} from "../../../components/screen";
+import { useBreakpoints } from '../../../components/screen'
 
 const Bats: FC = () => {
-    const {isMobile} = useBreakpoints()
+  const { isMobile } = useBreakpoints()
 
-    return (
+  return (
         <Row gutter={isMobile ? [0, 64] : 0} className={'bats'}>
             <Col order={isMobile ? 2 : 1} className={'img-container'} span={isMobile ? 24 : 12}>
                 <ScrollAnimation animateIn='fadeIn' duration={1.5}>
@@ -29,7 +29,7 @@ const Bats: FC = () => {
                 </div>
             </Col>
         </Row>
-    )
+  )
 }
 
-export {Bats}
+export { Bats }
