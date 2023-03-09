@@ -5,7 +5,8 @@
     },
     "extends": [
         "plugin:react/recommended",
-        "standard-with-typescript"
+        "standard-with-typescript",
+        "plugin:prettier/recommended"
     ],
     "overrides": [
     ],
@@ -19,6 +20,9 @@
     ],
     "rules": {
         "react/react-in-jsx-scope": "off",
-        "@typescript-eslint/consistent-type-definitions": "off"
+        "@typescript-eslint/consistent-type-definitions": "off",
+        "import/named": "off",
+        "@typescript-eslint/strict-boolean-expressions": "off",
+        "@typescript-eslint/explicit-function-return-type": "off"
     }
 }

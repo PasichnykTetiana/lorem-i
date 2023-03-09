@@ -1,2 +1,2 @@
-export { Card } from './Card'
-export { Bats } from './Bats'
+export { Card } from "./Card";
+export { Bats } from "./Bats";

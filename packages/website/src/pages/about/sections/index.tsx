@@ -1,1 +1,1 @@
-export { We } from './We'
+export { We } from "./We";

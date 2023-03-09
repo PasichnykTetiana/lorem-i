@@ -1,5 +1,5 @@
 .secondaryFont(@Weight) {
-  font-family: 'Geograph @{Weight}', sans-serif;
+  font-family: "Geograph @{Weight}", sans-serif;
   font-display: block;
 }
 
@@ -41,7 +41,7 @@
     left: 0;
     height: 1px;
     background-color: @Color;
-    content: '';
+    content: "";
     pointer-events: none;
   }
 
@@ -54,7 +54,8 @@
   &:after {
     transform: translateY(0.25rem);
     opacity: 0;
-    transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275), opacity 0.4s;
+    transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275),
+      opacity 0.4s;
   }
 
   &:hover:before,
@@ -67,11 +68,13 @@
 
   &:hover:before,
   &:focus:before {
-    transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275), opacity 0.4s;
+    transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275),
+      opacity 0.4s;
   }
 
   &:hover:after,
   &:focus:after {
-    transition: transform 0s 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275), opacity 0s 0.4s;
+    transition: transform 0s 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275),
+      opacity 0s 0.4s;
   }
 }
