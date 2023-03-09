@@ -1,0 +1,11 @@
+# Logs
+*.log
+
+# Process management
+*.pid.lock
+
+# Dependency management
+node_modules
+
+# Environmnet
+.env

@@ -1,4 +1,3 @@
-import './index.less'
+import "./index.less";
 
-export { Content } from './Content'
-// export { DefaultLayout } from './DefaultLayout'
+export { Content } from "./Content";

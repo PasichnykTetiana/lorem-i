@@ -1,22 +1,20 @@
-import React from 'react'
-import { FC, SVGProps } from 'react'
-import { ReactComponent as Pawn } from './images/pawn.svg'
-import { ReactComponent as Queen } from './images/queen.svg'
-import { ReactComponent as ArrowNext } from './images/Arrow.svg'
-import { ReactComponent as ArrowPrev } from './images/ArrowP.svg'
+import React, { type FC, type SVGProps } from "react";
 
-const icons: { [key: string]: FC<SVGProps<SVGSVGElement>> } = {
-    pawn: Pawn,
-    queen: Queen,
-    arrowNext: ArrowNext,
-    arrowPrev: ArrowPrev
-} as const
+import { ReactComponent as ArrowNext } from "./images/Arrow.svg";
+import { ReactComponent as ArrowPrev } from "./images/ArrowP.svg";
+import { ReactComponent as Dot } from "./images/Dot.svg";
 
-type SvgIconProps = SVGProps<SVGSVGElement> & { type: string }
+const icons: Record<string, FC<SVGProps<SVGSVGElement>>> = {
+  dot: Dot,
+  arrowNext: ArrowNext,
+  arrowPrev: ArrowPrev,
+} as const;
 
-const SvgIcon: FC<SvgIconProps> = ({ type,  ...svgProps }) => {
-    const Icon = icons[type] ?? null
-    return Icon && <Icon {...svgProps} />
-}
+type SvgIconProps = SVGProps<SVGSVGElement> & { type: string };
 
-export { SvgIcon }
+const SvgIcon: FC<SvgIconProps> = ({ type, ...svgProps }) => {
+  const Icon = icons[type] ?? null;
+  return Icon && <Icon {...svgProps} />;
+};
+
+export { SvgIcon };

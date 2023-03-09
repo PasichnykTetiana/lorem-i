@@ -1,41 +1,25 @@
-
-type Scalars = {
-  ID: string
-  String: string
-  Boolean: boolean
-  Int: number
-  Float: number
-  DateTime: Date
-  I18NLocaleCode: string | 'en'
-  JSON: Record<string, any | any[] | string | number | boolean | null | undefined> | any[]
-  Upload: unknown
-}
-
-type HomePage = {
-  title: Scalars['String']
-  img?: Scalars['String']
-  subtitle?: Scalars['String']
-  info?: Scalars['String']
-}
+type Data = {
+  email: string;
+  password: string;
+  username: string;
+};
 
 type User = {
-  email: Scalars['String'];
-  isActivated: Scalars['String'];
-  username: Scalars['String'];
-  id: Scalars['String'];
-}
-
-type Data = {
-  email: Scalars['String'];
-  password: Scalars['String'];
-  username: Scalars['String'];
-}
-
+  email: string;
+  isActivated: string;
+  username: string;
+  id: string;
+};
 
 type AuthResponse = {
-  accessToken: Scalars['String'];
-  refreshToken: Scalars['String'];
+  accessToken: string;
+  refreshToken: string;
   user: User;
-}
+};
 
-
+type Person = {
+  _id: string;
+  name: string;
+  occupation: string;
+  photo: string;
+};

@@ -1,0 +1,80 @@
+.secondaryFont(@Weight) {
+  font-family: "Geograph @{Weight}", sans-serif;
+  font-display: block;
+}
+
+.link-decoration(@Color) {
+  position: relative;
+  color: @Color;
+  font-weight: initial;
+  letter-spacing: 0;
+  text-decoration: none;
+}
+
+.animationCard() {
+  opacity: 0;
+  animation-name: shownCard;
+  animation-duration: 0.3s;
+  animation-timing-function: linear;
+  animation-fill-mode: forwards;
+}
+@keyframes shownCard {
+  to {
+    opacity: 1;
+  }
+}
+
+.hoverUnderliningVertical(@Color) {
+  &:hover,
+  &:focus,
+  &:hover span,
+  &:focus span {
+    color: @Color;
+    transition: color 0.4s;
+  }
+
+  &:before,
+  &:after {
+    position: absolute;
+    right: 0;
+    bottom: -0.125rem;
+    left: 0;
+    height: 1px;
+    background-color: @Color;
+    content: "";
+    pointer-events: none;
+  }
+
+  &:before {
+    transform: translateY(-0.5rem);
+    opacity: 0;
+    transition: transform 0s cubic-bezier(0.175, 0.885, 0.32, 1.275), opacity 0s;
+  }
+
+  &:after {
+    transform: translateY(0.25rem);
+    opacity: 0;
+    transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275),
+      opacity 0.4s;
+  }
+
+  &:hover:before,
+  &:hover:after,
+  &:focus:before,
+  &:focus:after {
+    transform: translateY(0);
+    opacity: 1;
+  }
+
+  &:hover:before,
+  &:focus:before {
+    transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275),
+      opacity 0.4s;
+  }
+
+  &:hover:after,
+  &:focus:after {
+    transition: transform 0s 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275),
+      opacity 0s 0.4s;
+  }
+}

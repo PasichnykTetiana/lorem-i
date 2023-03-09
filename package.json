@@ -10,13 +10,26 @@
     "packages/*"
   ],
   "dependencies": {
-    "prettier": "^2.8.3"
+    "@typescript-eslint/eslint-plugin": "^5.0.0",
+    "eslint-config-standard-with-typescript": "^34.0.0",
+    "eslint-plugin-import": "^2.25.2",
+    "eslint-plugin-n": "^15.0.0",
+    "eslint-plugin-promise": "^6.0.0",
+    "eslint-plugin-react": "^7.32.2",
+    "typescript": "*"
   },
   "scripts": {
     "start": "concurrently 'yarn:start:server' 'yarn:start:website'",
     "start:server": "yarn workspace @lorem-i/server run dev",
     "start:website": "yarn workspace @lorem-i/website run start",
-    "fix": "yarn lint:format --write packages/*/src",
-    "lint:format": "node_modules/.bin/prettier"
+    "fix": " yarn prettier --write packages && yarn lint:scripts . --fix packages/**/*.{ts,tsx}",
+    "prettier": "node_modules/.bin/prettier",
+    "lint:scripts": "node_modules/.bin/eslint"
+  },
+  "devDependencies": {
+    "eslint": "^8.0.1",
+    "eslint-config-prettier": "^8.7.0",
+    "eslint-plugin-prettier": "^4.2.1",
+    "prettier": "2.8.4"
   }
 }

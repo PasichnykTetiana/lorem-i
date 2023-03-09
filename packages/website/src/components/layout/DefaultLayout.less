@@ -1,4 +1,4 @@
-@import 'src/components/app/index';
+@import "src/components/app/index";
 
 html {
   scroll-behavior: smooth;
@@ -6,7 +6,6 @@ html {
   .submenu {
     .ant-typography {
       font-size: 15px;
-
     }
   }
 }
@@ -15,7 +14,12 @@ html {
   background-color: @layout-body-background;
 }
 
-.ant-dropdown-menu-item:hover, .ant-dropdown-menu-submenu-title:hover, .ant-dropdown-menu-item.ant-dropdown-menu-item-active, .ant-dropdown-menu-item.ant-dropdown-menu-submenu-title-active, .ant-dropdown-menu-submenu-title.ant-dropdown-menu-item-active, .ant-dropdown-menu-submenu-title.ant-dropdown-menu-submenu-title-active {
+.ant-dropdown-menu-item:hover,
+.ant-dropdown-menu-submenu-title:hover,
+.ant-dropdown-menu-item.ant-dropdown-menu-item-active,
+.ant-dropdown-menu-item.ant-dropdown-menu-submenu-title-active,
+.ant-dropdown-menu-submenu-title.ant-dropdown-menu-item-active,
+.ant-dropdown-menu-submenu-title.ant-dropdown-menu-submenu-title-active {
   opacity: 0.95;
   background-color: transparent;
 }
@@ -28,8 +32,7 @@ html {
 
 #root {
   width: 100%;
-  //  overflow: hidden;
-
+  overflow: hidden;
 
   h1,
   h2,
@@ -129,7 +132,6 @@ html {
       border-top: 5px solid black;
     }
 
-
     .ant-menu-submenu-title {
       h5 {
         display: flex;
@@ -216,7 +218,7 @@ html {
     @media (min-width: @screen-xs + 1) and (max-width: @screen-lg) {
       padding: 56px 0;
     }
-    @media only screen and (min-width: @screen-lg ) {
+    @media only screen and (min-width: @screen-lg) {
       padding: @padding-container 0;
     }
   }
