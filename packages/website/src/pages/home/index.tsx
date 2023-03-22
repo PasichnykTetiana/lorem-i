@@ -4,7 +4,7 @@ import { useBreakpoints } from "../../components/screen";
 import { type FC } from "react";
 import { HeroSection } from "../../components/section";
 import SectionContainer from "../../components/section/SectionContainer";
-import { Card, Bats } from "./sections/index";
+import { Card, Bats, Shop } from "./sections/index";
 import jack from "./img/jack.png";
 import img from "./img/images.png";
 import img2 from "./img/images2.png";
@@ -41,6 +41,7 @@ const Home: FC = () => {
   return (
     <>
       <SectionContainer>
+        <Shop />
         <Carousel
           effect="fade"
           style={{ maxWidth: "100vw" }}

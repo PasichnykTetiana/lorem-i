@@ -120,7 +120,7 @@ const StaffGrid: FC<
           >
             <div className="item-wrapper">
               <div className="img-block">
-                <img
+                <Image
                   src={item.photo ? item.photo : placeholders[index % 3]}
                   className="img"
                 />

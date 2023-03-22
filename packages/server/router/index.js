@@ -1,6 +1,7 @@
 const Router = require("express").Router;
 const userController = require("../controllers/user-controller");
 const weController = require("../controllers/we-controller");
+const productController = require("../controllers/product-controller");
 
 const router = new Router();
 const { body } = require("express-validator");
@@ -20,5 +21,7 @@ router.get("/activate/:link", userController.activate);
 router.get("/refresh", userController.refresh);
 router.get("/users", authMiddleware, userController.getUsers);
 router.get("/we", weController.getWe);
+router.get("/products", productController.getProducts);
+router.get('/products/:id', productController.getProduct);
 
 module.exports = router;
