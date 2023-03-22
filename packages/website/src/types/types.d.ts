@@ -23,3 +23,10 @@ type Person = {
   occupation: string;
   photo: string;
 };
+type Product = {
+  _id?: string;
+  title?: string;
+  description?: string;
+  price?: number;
+  photo?: string;
+};

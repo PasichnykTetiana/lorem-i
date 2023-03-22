@@ -3,6 +3,7 @@ import { type FC } from "react";
 import { HeroSection } from "../../components/section";
 import SectionContainer from "../../components/section/SectionContainer";
 import { We } from "./sections/index";
+
 const About: FC = () => {
   return (
     <>

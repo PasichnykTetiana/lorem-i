@@ -8,6 +8,8 @@ const About = lazy<FC>(async () => await import("./about"));
 const Auth = lazy<FC>(async () => await import("./registration"));
 const Login = lazy<FC>(async () => await import("./login"));
 const NotFound = lazy<FC>(async () => await import("./not-found"));
+const Product = lazy<FC>(async () => await import("./product"));
+
 
 const routes: RouteObject[] = [
   {
@@ -21,6 +23,10 @@ const routes: RouteObject[] = [
       {
         path: "about",
         element: <About />,
+      },
+      {
+        path: "/product/:id",
+        element: <Product />,
       },
       // {
       //   path: 'login',
