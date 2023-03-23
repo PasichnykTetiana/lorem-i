@@ -22,7 +22,7 @@ mongoose.set("strictQuery", false);
 app.use("/api", router);
 app.use(errorMiddleware);
 
-const start = async () => {
+exports.handler = async () => {
     try {
         await mongoose.connect(process.env.DB_URL, {
             useNewUrlParser: true,
@@ -33,5 +33,3 @@ const start = async () => {
         console.log(e);
     }
 };
-
-module.exports = { handler: start };
