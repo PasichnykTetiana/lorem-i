@@ -8,7 +8,7 @@ const router = require("../../packages/server/router/index");
 const errorMiddleware = require("../../packages/server/middlewares/error-middleware");
 
 const app = express();
-const PORT = process.env.PORT || 5000;
+const PORT = process.env.PORT || 5001;
 
 app.use(express.json());
 app.use(cookieParser());
