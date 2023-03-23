@@ -13,8 +13,6 @@ const Footer: FC = () => {
     {
       links: [
         { name: "About us", link: "/about" },
-        { name: "none", link: "/" },
-        { name: "none", link: "/" },
       ],
       title: "Sitemap",
     },
