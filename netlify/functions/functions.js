@@ -4,8 +4,8 @@ const express = require("express");
 const cors = require("cors");
 const cookieParser = require("cookie-parser");
 const mongoose = require("mongoose");
-const router = require("../packages/server/router/index");
-const errorMiddleware = require("../packages/server/middlewares/error-middleware");
+const router = require("../../packages/server/router/index");
+const errorMiddleware = require("../../packages/server/middlewares/error-middleware");
 const app = express();
 const PORT = process.env.PORT || 5000;
 
