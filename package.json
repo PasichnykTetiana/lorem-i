@@ -24,7 +24,8 @@
     "start:website": "yarn workspace @lorem-i/website run start",
     "fix": " yarn prettier --write packages && yarn lint:scripts . --fix packages/**/*.{ts,tsx}",
     "prettier": "node_modules/.bin/prettier",
-    "lint:scripts": "node_modules/.bin/eslint"
+    "lint:scripts": "node_modules/.bin/eslint",
+    "build": "yarn workspace @lorem-i/website build"
   },
   "devDependencies": {
     "eslint": "^8.0.1",
