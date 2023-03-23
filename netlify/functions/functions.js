@@ -6,6 +6,7 @@ const cookieParser = require("cookie-parser");
 const mongoose = require("mongoose");
 const router = require("../../packages/server/router/index");
 const errorMiddleware = require("../../packages/server/middlewares/error-middleware");
+
 const app = express();
 const PORT = process.env.PORT || 5000;
 
@@ -32,6 +33,5 @@ const start = async () => {
         console.log(e);
     }
 };
-start();
 
-module.exports = app;
+module.exports = { handler: start };
