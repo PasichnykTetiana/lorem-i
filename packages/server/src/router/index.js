@@ -7,7 +7,6 @@ const router = new Router();
 const { body } = require("express-validator");
 const authMiddleware = require("../middlewares/auth-middleware");
 
-// body('username').isString
 router.post(
   "/registration",
   body("email").isEmail(),
