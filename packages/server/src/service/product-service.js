@@ -9,6 +9,10 @@ class ProductService {
         const product = await ProductsModel.findById(productId);
         return product;
     }
+    async getProductByTest(productId) {
+        const product = await ProductsModel.findById(productId);
+        return {"message222":"22222"};
+    }
 }
 
 module.exports = new ProductService();

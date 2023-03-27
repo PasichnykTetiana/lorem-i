@@ -9,3 +9,5 @@ node_modules
 
 # Environmnet
 .env
+# Local Netlify folder
+.netlify
