@@ -45,15 +45,6 @@ exports.handler = async (event, context) => {
         }else if (event.httpMethod === 'GET' && path.startsWith("/.netlify/functions/functions/api/refresh")) {
             const { refreshToken } = event.cookies;
             result = await userService.refresh(refreshToken);
-            const response = {
-                statusCode: 200,
-                body: JSON.stringify(result),
-                headers: {
-                    "Set-Cookie": `refreshToken=${result.refreshToken}; Max-Age=${30 * 24 * 60 * 60}; HttpOnly`,
-                    "Content-Type": "application/json",
-                },
-            };
-            return response;
         }else if (event.httpMethod === 'GET' && path.startsWith("/.netlify/functions/functions/api/activate/")) {
             const id = path.split("/").pop();
             result = await userService.activate(id)
@@ -63,10 +54,21 @@ exports.handler = async (event, context) => {
             const { email, password } = JSON.parse(event.body);
             result = await userService.login(email, password);
         }
-        return {
-            statusCode: 200,
-            body: JSON.stringify(result),
-        };
+     if(result.refreshToken){
+         return {
+             statusCode: 200,
+             body: JSON.stringify(result),
+             headers: {
+                 "Set-Cookie": `refreshToken=${result.refreshToken}; Max-Age=${30 * 24 * 60 * 60}; HttpOnly`,
+                 "Content-Type": "application/json",
+             },
+         }
+     } else {
+         return {
+             statusCode: 200,
+             body: JSON.stringify(result),
+         };
+     }
     } catch (e) {
         console.log(e);
     }
