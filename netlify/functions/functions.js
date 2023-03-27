@@ -43,14 +43,17 @@ exports.handler = async (event, context) => {
             app.use(authMiddleware);
             result = await userService.getAllUsers()
         }else if (event.httpMethod === 'GET' && path.startsWith("/.netlify/functions/functions/api/refresh")) {
-            const cookieHeader = event.headers['Cookie'];
-            const cookies = cookieHeader.split('; ').reduce((acc, cookie) => {
-                const [key, value] = cookie.split('=');
-                acc[key] = value;
-                return acc;
-            }, {});
-            const refreshToken = cookies['refreshToken'];
-            result = await userService.refresh(refreshToken)
+            const { refreshToken } = event.cookies;
+            result = await userService.refresh(refreshToken);
+            const response = {
+                statusCode: 200,
+                body: JSON.stringify(result),
+                headers: {
+                    "Set-Cookie": `refreshToken=${result.refreshToken}; Max-Age=${30 * 24 * 60 * 60}; HttpOnly`,
+                    "Content-Type": "application/json",
+                },
+            };
+            return response;
         }else if (event.httpMethod === 'GET' && path.startsWith("/.netlify/functions/functions/api/activate/")) {
             const id = path.split("/").pop();
             result = await userService.activate(id)
