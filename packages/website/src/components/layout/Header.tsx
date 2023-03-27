@@ -79,7 +79,7 @@ const Header: FC = () => {
               <Row gutter={16} justify={"space-between"}>
                 <Col>
                   <Typography.Title level={5}>
-                    {store.userName}
+                    {store.userName && store.userName}
                   </Typography.Title>
                 </Col>
                 <Col>
