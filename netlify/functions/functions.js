@@ -41,9 +41,9 @@ exports.handler = async (event, context) => {
             result = await productsService.getProductById(id);
         }else if (event.httpMethod === 'GET' && path.startsWith("/.netlify/functions/functions/api/users")) {
             app.use(authMiddleware);
-            result = await userService.getAllUsers
+            result = await userService.getAllUsers()
         }else if (event.httpMethod === 'GET' && path.startsWith("/.netlify/functions/functions/api/refresh")) {
-            result = await userService.refresh
+            result = await userService.refresh()
         }else if (event.httpMethod === 'GET' && path.startsWith("/.netlify/functions/functions/api/activate/")) {
             const id = path.split("/").pop();
             result = await userService.activate(id)
