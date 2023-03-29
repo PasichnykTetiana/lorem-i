@@ -23,7 +23,7 @@ mongoose.set("strictQuery", false);
 app.use("/api", router);
 app.use(errorMiddleware);
 
-exports.handler = async (event, context) => {
+exports.handler = async (event) => {
     try {
         await mongoose.connect(process.env.DB_URL, {
             useNewUrlParser: true,
