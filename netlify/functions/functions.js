@@ -7,6 +7,7 @@ const errorMiddleware = require("../../packages/server/src/middlewares/error-mid
 const productsService = require("../../packages/server/src/service/product-service");
 const weService = require("../../packages/server/src/service/we-service");
 const userService = require("../../packages/server/src/service/user-service");
+
 const authMiddleware = require("../../packages/server/src/middlewares/auth-middleware");
 
 const app = express();
@@ -30,45 +31,50 @@ exports.handler = async (event, context) => {
         });
         let result;
 
-        const { path } = event;
+        const {path} = event;
 
         if (event.httpMethod === 'GET' && path === "/.netlify/functions/functions/api/products") {
             result = await productsService.getProducts();
         } else if (event.httpMethod === 'GET' && path === "/.netlify/functions/functions/api/we") {
             result = await weService.getWe();
-        }else if (event.httpMethod === 'GET' && path.startsWith("/.netlify/functions/functions/api/products/")) {
+        } else if (event.httpMethod === 'GET' && path.startsWith("/.netlify/functions/functions/api/products/")) {
             const id = path.split("/").pop();
             result = await productsService.getProductById(id);
-        }else if (event.httpMethod === 'GET' && path.startsWith("/.netlify/functions/functions/api/users")) {
+        } else if (event.httpMethod === 'GET' && path.startsWith("/.netlify/functions/functions/api/users")) {
             app.use(authMiddleware);
             result = await userService.getAllUsers()
-        }else if (event.httpMethod === 'GET' && path.startsWith("/.netlify/functions/functions/api/refresh")) {
-            const { refreshToken } = event.cookies;
-            result = await userService.refresh(refreshToken);
-        }else if (event.httpMethod === 'GET' && path.startsWith("/.netlify/functions/functions/api/activate/")) {
+        } else if (event.httpMethod === 'GET' && path.startsWith("/.netlify/functions/functions/api/refresh")) {
+            const cookieHeader = event.headers['cookie'];
+            const cookies = cookieHeader ? cookieHeader.split(';') : [];
+            const refreshTokenCookie = cookies.find(cookie => cookie.includes('refreshToken'));
+            const refreshToken = refreshTokenCookie ? refreshTokenCookie.split('=')[1] : null;
+            result = await userService.refresh(refreshToken)
+        } else if (event.httpMethod === 'GET' && path.startsWith("/.netlify/functions/functions/api/activate/")) {
             const id = path.split("/").pop();
             result = await userService.activate(id)
         } else if (event.httpMethod === 'POST' && path.startsWith("/.netlify/functions/functions/api/logout")) {
             result = await userService.logout();
         } else if (event.httpMethod === 'POST' && path.startsWith("/.netlify/functions/functions/api/login")) {
-            const { email, password } = JSON.parse(event.body);
+            const {email, password} = JSON.parse(event.body);
+
             result = await userService.login(email, password);
+
         }
-     if(result.refreshToken){
-         return {
-             statusCode: 200,
-             body: JSON.stringify(result),
-             headers: {
-                 "Set-Cookie": `refreshToken=${result.refreshToken}; Max-Age=${30 * 24 * 60 * 60}; HttpOnly`,
-                 "Content-Type": "application/json",
-             },
-         }
-     } else {
-         return {
-             statusCode: 200,
-             body: JSON.stringify(result),
-         };
-     }
+        if (result.refreshToken) {
+            return {
+                statusCode: 200,
+                headers: {
+                    'Set-Cookie': `refreshToken=${result.refreshToken};Max-Age=2592000; HttpOnly; Path=/; Domain=${process.env.DOMAIN};`,
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(result),
+            }
+        } else {
+            return {
+                statusCode: 200,
+                body: JSON.stringify(result),
+            };
+        }
     } catch (e) {
         console.log(e);
     }
