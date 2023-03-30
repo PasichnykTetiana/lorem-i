@@ -79,6 +79,7 @@ export default class Store {
       this.setAuth(true);
       this.setUserName(response.data.user.username);
       this.setUser(response.data.user);
+      console.log(response.data.user)
     } catch (e) {
       console.log(e);
     } finally {
