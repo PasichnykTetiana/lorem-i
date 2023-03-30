@@ -17,6 +17,7 @@ type AuthResponse = {
   user: User;
 };
 
+
 type Person = {
   _id: string;
   name: string;
