@@ -27,7 +27,7 @@ const ButtonCart: FC<Partial<ButtonCart>> = ({productId}) => {
     }
 
 
-    return (<Button onClick={() => addCart(productId)}>
+    return (<Button type="primary" onClick={() => addCart(productId)}>
         Add
     </Button>)
 }

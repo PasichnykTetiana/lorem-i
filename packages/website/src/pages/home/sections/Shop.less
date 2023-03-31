@@ -2,12 +2,35 @@
 @import "../../../styles/styles";
 
 #root {
+  .ant-list-item {
+    height: 430px;
+  }
   .product-card {
-    .animationCard();
-    h2 {
-      margin-bottom: 101px;
-    }
+    .ant-card:hover {
+      button {
+        .animationCard();
+        //opacity: 1;
+        display: block;
+      }
 
+    }
+    button {
+      display: none;
+      opacity: 0;
+    }
+    .animationCard();
+    //h2 {
+    //  margin-bottom: 101px;
+    //}
+    .ant-typography {
+      margin-bottom: @margin-sm;
+    }
+    .img{
+      border-radius: 0;
+    }
     margin-bottom: 117px;
+  }
+  h3 {
+    margin-top: @margin-md;
   }
 }

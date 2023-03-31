@@ -8,6 +8,7 @@ import SectionContainer from "../../../components/section/SectionContainer";
 import {ButtonCart} from "../../../components/layout/ButtonCart";
 import {useBreakpoints} from "../../../components/screen";
 import ContentService from "../../../services/ContentServices";
+import {Card} from 'antd';
 
 const Shop: FC = () => {
 
@@ -50,15 +51,26 @@ const Shop: FC = () => {
                 renderItem={(item, index) => (
                     <List.Item style={index >= 1 ? {animationDelay: `0.${index}s`} : {}} key={item?._id}
                                className='product-card'>
-                        <Link to={`/product/${item?._id}`}>
-                            {item.photo && <Image
+                        <Card
+                            hoverable
+                            style={{background: "transparent"}}
+                            cover={item.photo && <Image
                                 src={item.photo}
                                 className="img"
                             />}
-                            <Typography.Title level={3}>{item?.title}</Typography.Title>
-                            <Typography.Paragraph>{item?.description}</Typography.Paragraph>
-                        </Link>
-                        <ButtonCart productId={item?._id} />
+                        >
+                            <Link to={`/product/${item?._id}`}>
+                                {/*{item.photo && <Image*/}
+                                {/*    src={item.photo}*/}
+                                {/*    className="img"*/}
+                                {/*/>}*/}
+
+                                <Typography.Title level={3}>{item?.title}</Typography.Title>
+                                <Typography.Paragraph type={'secondary'}>{item?.description}</Typography.Paragraph>
+                                <Typography.Paragraph>{item?.price?.toString()} $</Typography.Paragraph>
+                            </Link>
+                            <ButtonCart productId={item?._id}/>
+                        </Card>
                     </List.Item>
                 )}
             />
