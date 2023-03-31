@@ -9,6 +9,7 @@ export default class Store {
   user = {} as User;
   userName = "" as string;
   isLoading = false;
+  cart = []
 
   constructor() {
     makeAutoObservable(this);
