@@ -1,9 +1,9 @@
 import "./Header.less";
 import { Button, Col, Row, Typography, Menu, Dropdown, Space } from "antd";
-import {type FC, useContext, useEffect, useState} from "react";
+import { type FC, useContext, useEffect, useState } from "react";
 import { Link, NavLink } from "react-router-dom";
 import img from "./img/logo.png";
-import { ShoppingOutlined } from '@ant-design/icons';
+import { ShoppingOutlined } from "@ant-design/icons";
 import type { MenuProps } from "antd";
 import { observer } from "mobx-react-lite";
 import { useBreakpoints } from "../../components/screen";
@@ -22,7 +22,7 @@ const Header: FC = () => {
     if (localStorage.getItem("token") && !store.isLoading) {
       store.checkCart();
     }
-    console.log(store.cart.length)
+    console.log(store.cart.length);
   }, []);
   const data = [{ title: "About us", href: "/about" }];
   const items: MenuProps["items"] = [
@@ -49,10 +49,16 @@ const Header: FC = () => {
       <Row wrap={false} align={"middle"} justify={"space-between"}>
         <Col span={6}>
           <Link to={"/"}>
-            <img width={'50%'} src={img} />
+            {isDesktop ? <img width={"50%"} src={img} /> : "ddd"}
           </Link>
         </Col>
-        <Col span={12}>
+        <Col
+            style={{
+              display: "flex",
+              justifyContent: "center",
+              alignItems: "center",
+            }}
+            span={12}>
           {isDesktop ? (
             <Menu mode="horizontal">
               {data.map((it) => (
@@ -77,26 +83,25 @@ const Header: FC = () => {
               ))}
             </Menu>
           ) : (
-            <div>d</div>
+              <img  width={"50%"} src={img} />
           )}
         </Col>
-          {store.isAuth ? (
-            <Col style={{justifyContent: 'end'}} span={6}>
-              <div style={{width: '50%'}}>
-
-
-              <Row gutter={16} justify={"space-between"}>
-                <Col >
+        {store.isAuth ? (
+          <Col style={{ justifyContent: "end" }} span={6}>
+            {/*<div style={{ width: "50%" }}>*/}
+              <Row  gutter={16}  justify={"space-between"}>
+                <Col>
                   <ShoppingOutlined />
-                  <Typography.Paragraph style={{margin: 0}}>
+                  {/* <Typography.Title level={5}> */}
+                  {/*  {store.userName && store.userName} */}
+                  {/* </Typography.Title> */}
+                </Col>
+                <Col>
+                  <Typography.Paragraph style={{ margin: 0 }}>
                     ({store.cart.length})
                   </Typography.Paragraph>
-
-                  {/*<Typography.Title level={5}>*/}
-                  {/*  {store.userName && store.userName}*/}
-                  {/*</Typography.Title>*/}
                 </Col>
-                {/*<ShoppingOutlined />*/}
+                {/* <ShoppingOutlined /> */}
                 <Col>
                   <Button
                     onClick={async () => {
@@ -109,25 +114,33 @@ const Header: FC = () => {
                   </Button>
                 </Col>
               </Row>
-              </div>
-            </Col>
-          ) : (
-            <Dropdown
-              menu={{ items }}
-              open={open}
-              autoFocus={false}
-              onOpenChange={handleOpenChange}
-              trigger={["click"]}
-            >
-              <a
-                onClick={(e) => {
-                  e.preventDefault();
+            {/*</div>*/}
+          </Col>
+        ) : (
+            <Col
+                style={{
+                  display: "flex",
+                  justifyContent: "end",
                 }}
-              >
-                <Space>Log in</Space>
-              </a>
-            </Dropdown>
-          )}
+                span={6}>
+          <Dropdown
+            menu={{ items }}
+            open={open}
+            autoFocus={false}
+            onOpenChange={handleOpenChange}
+            trigger={["click"]}
+          >
+            <a
+              onClick={(e) => {
+                e.preventDefault();
+              }}
+            >
+             <Space>Log in</Space>
+            </a>
+          </Dropdown>
+            </Col>
+        )}
+
       </Row>
     </>
   );

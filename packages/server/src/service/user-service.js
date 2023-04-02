@@ -82,10 +82,10 @@ class UserService {
     const userData = tokenService.validateRefreshToken(refreshToken);
     const tokenFromDb = await tokenService.findToken(refreshToken);
 
-    console.log(refreshToken)
+    console.log(refreshToken);
 
     if (!userData || !tokenFromDb) {
-       // return refreshToken
+      // return refreshToken
       throw ApiError.UnauthorizedError();
     }
 
@@ -96,7 +96,7 @@ class UserService {
     await tokenService.saveToken(userDto.id, tokens.refreshToken);
 
     if (tokenFromDb) {
-      console.log({ ...tokens, user: userDto })
+      console.log({ ...tokens, user: userDto });
       return { ...tokens, user: userDto }; //*
     }
   }
