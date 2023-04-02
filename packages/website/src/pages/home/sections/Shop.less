@@ -31,11 +31,15 @@
       }
     }
   }
+  .product-card-click {
+    .animationCard();
+    display: block;
+  }
+
   .product-card {
     .ant-card:hover {
       button {
         .animationCard();
-        //opacity: 1;
         display: block;
       }
     }
@@ -44,9 +48,7 @@
       opacity: 0;
     }
     .animationCard();
-    //h2 {
-    //  margin-bottom: 101px;
-    //}
+
     .ant-typography {
       margin-bottom: @margin-sm;
     }
@@ -54,8 +56,17 @@
       border-radius: 0;
     }
     margin-bottom: 117px;
+
   }
   h3 {
     margin-top: @margin-md;
+  }
+  @media only screen and (max-width: @screen-xs) {
+    .product-card {
+      margin-bottom: 0;
+    }
+    .ant-list-item {
+      height: 330px;
+    }
   }
 }

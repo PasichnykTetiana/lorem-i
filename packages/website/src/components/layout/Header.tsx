@@ -10,11 +10,12 @@ import { useBreakpoints } from "../../components/screen";
 import Login from "./Login";
 import { Context } from "../app";
 import { SvgIcon } from "../icon/SvgIcon";
+import {Navigation} from "./Navigation";
 
 const Header: FC = () => {
   const [open, setOpen] = useState(false);
   const { store } = useContext(Context);
-  const { isDesktop } = useBreakpoints();
+  const { isDesktop,  isSM} = useBreakpoints();
   const handleOpenChange = (flag: boolean) => {
     setOpen(flag);
   };
@@ -24,7 +25,9 @@ const Header: FC = () => {
     }
     console.log(store.cart.length);
   }, []);
+
   const data = [{ title: "About us", href: "/about" }];
+
   const items: MenuProps["items"] = [
     {
       label: <Login />,
@@ -46,55 +49,31 @@ const Header: FC = () => {
 
   return (
     <>
+
       <Row wrap={false} align={"middle"} justify={"space-between"}>
-        <Col span={6}>
+
+        <Col span={isSM ? 3 : 6}>
           <Link to={"/"}>
-            {isDesktop ? <img width={"50%"} src={img} /> : "ddd"}
+            {isDesktop ? <img width={"50%"} src={img} /> : <Navigation />}
           </Link>
         </Col>
         <Col
             style={{
               display: "flex",
-              justifyContent: "center",
+              justifyContent: isSM ? "start" : "center",
               alignItems: "center",
             }}
-            span={12}>
-          {isDesktop ? (
-            <Menu mode="horizontal">
-              {data.map((it) => (
-                <div
-                  style={{
-                    display: "flex",
-                    justifyContent: "center",
-                    alignItems: "center",
-                  }}
-                  key={it?.title}
-                >
-                  <SvgIcon type={"dot"} />
-                  <Menu.Item>
-                    <Link to={it?.href}>
-                      <Typography.Title style={{ margin: 0 }} level={5}>
-                        {it?.title}
-                      </Typography.Title>
-                    </Link>
-                  </Menu.Item>
-                  <SvgIcon type={"dot"} />
-                </div>
-              ))}
-            </Menu>
+            span={isSM ? 10 : 12}>
+          {isDesktop ? (   <Navigation />
           ) : (
               <img  width={"50%"} src={img} />
           )}
         </Col>
         {store.isAuth ? (
-          <Col style={{ justifyContent: "end" }} span={6}>
-            {/*<div style={{ width: "50%" }}>*/}
-              <Row  gutter={16}  justify={"space-between"}>
+          <Col style={{ justifyContent: "end" }} span={isSM ? 11 : 6}>
+              <Row  gutter={8}  justify={"space-between"}>
                 <Col>
                   <ShoppingOutlined />
-                  {/* <Typography.Title level={5}> */}
-                  {/*  {store.userName && store.userName} */}
-                  {/* </Typography.Title> */}
                 </Col>
                 <Col>
                   <Typography.Paragraph style={{ margin: 0 }}>
@@ -122,7 +101,7 @@ const Header: FC = () => {
                   display: "flex",
                   justifyContent: "end",
                 }}
-                span={6}>
+                span={isSM ? 11 : 6}>
           <Dropdown
             menu={{ items }}
             open={open}

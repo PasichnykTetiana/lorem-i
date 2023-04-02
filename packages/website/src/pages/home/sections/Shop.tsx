@@ -50,6 +50,7 @@ const Shop: FC = () => {
           <List.Item
             style={index >= 1 ? { animationDelay: `0.${index}s` } : {}}
             key={item?._id}
+            onClick={()=>console.log(1)}
             className="product-card"
           >
             <Card hoverable style={{ background: "transparent" }}>

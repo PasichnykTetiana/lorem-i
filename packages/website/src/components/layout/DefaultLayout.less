@@ -178,6 +178,10 @@ html {
 
   .ant-btn {
     border-radius: 16px;
+    @media only screen and (max-width: @screen-md) {
+      padding: 2px 8px;
+      font-size: 12px;
+    }
     span {
       color: @layout-body-background;
     }
@@ -190,6 +194,9 @@ html {
     &.ant-btn-lg {
       height: 48px;
       border-radius: 22px;
+      @media only screen and (max-width: @screen-md) {
+        padding: 4px 12px;
+      }
     }
   }
 
