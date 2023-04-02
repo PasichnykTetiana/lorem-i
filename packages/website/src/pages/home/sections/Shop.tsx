@@ -12,7 +12,7 @@ const Shop: FC = () => {
     const [cards, setCards] = useState<Product[]>([]);
     const [activeIndex, setActiveIndex] = useState<number | null>(null);
 
-    const { isDesktop,  isSM} = useBreakpoints();
+    const { isDesktop,  isSM } = useBreakpoints();
     useEffect(() => {
         async function getProducts() {
             try {
