@@ -7,6 +7,7 @@ const errorMiddleware = require("../../packages/server/src/middlewares/error-mid
 const productsService = require("../../packages/server/src/service/product-service");
 const weService = require("../../packages/server/src/service/we-service");
 const userService = require("../../packages/server/src/service/user-service");
+const cartService = require("../../packages/server/src/service/cart-service");
 
 const authMiddleware = require("../../packages/server/src/middlewares/auth-middleware");
 
@@ -56,9 +57,20 @@ exports.handler = async (event) => {
             result = await userService.logout();
         } else if (event.httpMethod === 'POST' && path.startsWith("/.netlify/functions/functions/api/login")) {
             const {email, password} = JSON.parse(event.body);
-
             result = await userService.login(email, password);
-
+        } else if (event.httpMethod === 'GET' && path.startsWith("/.netlify/functions/functions/api/cart")) {
+            const cookieHeader = event.headers['cookie'];
+            const cookies = cookieHeader ? cookieHeader.split(';') : [];
+            const refreshTokenCookie = cookies.find(cookie => cookie.includes('refreshToken'));
+            const refreshToken = refreshTokenCookie ? refreshTokenCookie.split('=')[1] : null;
+            result = await cartService.getCart(refreshToken);
+        } else if (event.httpMethod === 'POST' && path.startsWith("/.netlify/functions/functions/api/cart/add/")) {
+            const id = path.split("/").pop();
+            const cookieHeader = event.headers['cookie'];
+            const cookies = cookieHeader ? cookieHeader.split(';') : [];
+            const refreshTokenCookie = cookies.find(cookie => cookie.includes('refreshToken'));
+            const refreshToken = refreshTokenCookie ? refreshTokenCookie.split('=')[1] : null;
+            result = await cartService.addToCart(id, refreshToken);
         }
         if (result.refreshToken) {
             return {
