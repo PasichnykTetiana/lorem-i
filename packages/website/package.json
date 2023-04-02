@@ -10,6 +10,7 @@
     "start": "yarn vite serve"
   },
   "dependencies": {
+    "@ant-design/icons": "^5.0.1",
     "@babel/preset-react": "^7.18.6",
     "@emotion/react": "^11.10.5",
     "@types/axios": "^0.14.0",

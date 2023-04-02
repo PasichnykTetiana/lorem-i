@@ -1,8 +1,9 @@
+import "./Header.less";
 import { Button, Col, Row, Typography, Menu, Dropdown, Space } from "antd";
-import { type FC, useContext, useState } from "react";
+import {type FC, useContext, useEffect, useState} from "react";
 import { Link, NavLink } from "react-router-dom";
 import img from "./img/logo.png";
-
+import { ShoppingOutlined } from '@ant-design/icons';
 import type { MenuProps } from "antd";
 import { observer } from "mobx-react-lite";
 import { useBreakpoints } from "../../components/screen";
@@ -17,6 +18,12 @@ const Header: FC = () => {
   const handleOpenChange = (flag: boolean) => {
     setOpen(flag);
   };
+  useEffect(() => {
+    if (localStorage.getItem("token") && !store.isLoading) {
+      store.checkCart();
+    }
+    console.log(store.cart.length)
+  }, []);
   const data = [{ title: "About us", href: "/about" }];
   const items: MenuProps["items"] = [
     {
@@ -40,12 +47,12 @@ const Header: FC = () => {
   return (
     <>
       <Row wrap={false} align={"middle"} justify={"space-between"}>
-        <Col>
+        <Col span={6}>
           <Link to={"/"}>
-            <img width={200} src={img} />
+            <img width={'50%'} src={img} />
           </Link>
         </Col>
-        <Col>
+        <Col span={12}>
           {isDesktop ? (
             <Menu mode="horizontal">
               {data.map((it) => (
@@ -73,15 +80,23 @@ const Header: FC = () => {
             <div>d</div>
           )}
         </Col>
-        <Col>
           {store.isAuth ? (
-            <Col>
+            <Col style={{justifyContent: 'end'}} span={6}>
+              <div style={{width: '50%'}}>
+
+
               <Row gutter={16} justify={"space-between"}>
-                <Col>
-                  <Typography.Title level={5}>
-                    {store.userName && store.userName}
-                  </Typography.Title>
+                <Col >
+                  <ShoppingOutlined />
+                  <Typography.Paragraph style={{margin: 0}}>
+                    ({store.cart.length})
+                  </Typography.Paragraph>
+
+                  {/*<Typography.Title level={5}>*/}
+                  {/*  {store.userName && store.userName}*/}
+                  {/*</Typography.Title>*/}
                 </Col>
+                {/*<ShoppingOutlined />*/}
                 <Col>
                   <Button
                     onClick={async () => {
@@ -94,11 +109,13 @@ const Header: FC = () => {
                   </Button>
                 </Col>
               </Row>
+              </div>
             </Col>
           ) : (
             <Dropdown
               menu={{ items }}
               open={open}
+              autoFocus={false}
               onOpenChange={handleOpenChange}
               trigger={["click"]}
             >
@@ -111,7 +128,6 @@ const Header: FC = () => {
               </a>
             </Dropdown>
           )}
-        </Col>
       </Row>
     </>
   );

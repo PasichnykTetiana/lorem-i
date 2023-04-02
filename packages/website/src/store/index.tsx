@@ -9,6 +9,7 @@ export default class Store {
   user = {} as User;
   userName = "" as string;
   isLoading = false;
+  cart = [] as string[]
 
   constructor() {
     makeAutoObservable(this);
@@ -25,7 +26,9 @@ export default class Store {
   setUser(user: User) {
     this.user = user;
   }
-
+  setCart(cart: string[]) {
+    this.cart = cart;
+  }
   setUserName(userName: string) {
     this.userName = userName;
   }
@@ -80,6 +83,21 @@ export default class Store {
       this.setUserName(response.data.user.username);
       this.setUser(response.data.user);
       console.log(response.data.user)
+    } catch (e) {
+      console.log(e);
+    } finally {
+      this.setLoading(false);
+    }
+  }
+  async checkCart() {
+    console.log('jijijijji')
+   // this.setLoading(true);
+    try {
+      const response = await axios.get<CartResponse>(`${API_URL}/cart`, {
+        withCredentials: true,
+      });
+      this.setCart(response.data.products)
+       console.log(response.data.products, 'products')
     } catch (e) {
       console.log(e);
     } finally {

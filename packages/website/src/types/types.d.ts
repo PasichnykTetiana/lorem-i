@@ -11,6 +11,11 @@ type User = {
   id: string;
 };
 
+type CartResponse = {
+  user: string;
+  products: string[]
+};
+
 type AuthResponse = {
   accessToken: string;
   refreshToken: string;

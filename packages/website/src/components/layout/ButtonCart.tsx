@@ -9,13 +9,7 @@ type ButtonCart = {
 };
 
 const ButtonCart: FC<Partial<ButtonCart>> = ({productId}) => {
-    // const {store} = useContext(Context);
-    //
-    // useEffect(() => {
-    //     let m = toJS(store.user)
-    //     console.log(m, '&&&')
-    // }, []);
-
+    const {store} = useContext(Context);
 
     async function addCart(productId?: string) {
         try {
@@ -23,6 +17,9 @@ const ButtonCart: FC<Partial<ButtonCart>> = ({productId}) => {
             console.log(response.data)
         } catch (e) {
             console.log(e);
+        }
+        finally {
+            store.checkCart();
         }
     }
 
