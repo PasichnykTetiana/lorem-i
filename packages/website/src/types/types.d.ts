@@ -13,7 +13,7 @@ type User = {
 
 type CartResponse = {
   user: string;
-  products: string[]
+  products: string[];
 };
 
 type AuthResponse = {
@@ -21,7 +21,6 @@ type AuthResponse = {
   refreshToken: string;
   user: User;
 };
-
 
 type Person = {
   _id: string;

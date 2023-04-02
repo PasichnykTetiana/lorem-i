@@ -24,6 +24,6 @@ router.get("/refresh", userController.refresh);
 router.get("/users", authMiddleware, userController.getUsers);
 router.get("/we", weController.getWe);
 router.get("/products", productController.getProducts);
-router.get('/products/:id', productController.getProduct);
+router.get("/products/:id", productController.getProduct);
 
 module.exports = router;

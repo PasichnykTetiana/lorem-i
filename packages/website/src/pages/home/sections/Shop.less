@@ -9,53 +9,64 @@
     margin: 0;
   }
   .ant-pagination {
-    li, button {
+    li,
+    button {
       background: @color-green;
       border: 1px solid @color-deep-green;
     }
-    .ant-pagination-next:not(.ant-pagination-disabled), .ant-pagination-prev:not(.ant-pagination-disabled) {
-           .ant-pagination-item-link{
-             color: black;
-           }
+    .ant-pagination-next:not(.ant-pagination-disabled),
+    .ant-pagination-prev:not(.ant-pagination-disabled) {
+      .ant-pagination-item-link {
+        color: black;
+      }
     }
     .ant-pagination-item {
-      a{
-        color: black;}
-
+      a {
+        color: black;
+      }
     }
     .ant-pagination-item-active {
       a {
-        color: @color-deep-green
-
+        color: @color-deep-green;
       }
     }
   }
+  .product-card-click {
+    .animationCard();
+    display: block;
+  }
+
   .product-card {
     .ant-card:hover {
       button {
         .animationCard();
-        //opacity: 1;
         display: block;
       }
-
     }
     button {
       display: none;
       opacity: 0;
     }
     .animationCard();
-    //h2 {
-    //  margin-bottom: 101px;
-    //}
+
     .ant-typography {
       margin-bottom: @margin-sm;
     }
-    .img{
+    .img {
       border-radius: 0;
     }
     margin-bottom: 117px;
+
   }
   h3 {
     margin-top: @margin-md;
+  }
+  @media only screen and (max-width: @screen-xs) {
+    .product-card {
+      margin-bottom: 0;
+    }
+    .ant-list-item {
+      height: 330px;
+    }
   }
 }

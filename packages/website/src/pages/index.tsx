@@ -10,7 +10,6 @@ const Login = lazy<FC>(async () => await import("./login"));
 const NotFound = lazy<FC>(async () => await import("./not-found"));
 const Product = lazy<FC>(async () => await import("./product"));
 
-
 const routes: RouteObject[] = [
   {
     path: "/",
