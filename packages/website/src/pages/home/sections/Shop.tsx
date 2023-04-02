@@ -51,23 +51,23 @@ const Shop: FC = () => {
                 renderItem={(item, index) => (
                     <List.Item style={index >= 1 ? {animationDelay: `0.${index}s`} : {}} key={item?._id}
                                className='product-card'>
-                        <Link to={`/product/${item?._id}`}>
+
                         <Card
                             hoverable
                             style={{background: "transparent"}}
-                            cover={item.photo && <img
+                        >   <Link to={`/product/${item?._id}`}>
+                            {item.photo && <img
+                                style={{width: '100%'}}
                                 src={item.photo}
                                 className="img"
                             />}
-                        >
-
                                 <Typography.Title level={3}>{item?.title}</Typography.Title>
                                 <Typography.Paragraph type={'secondary'}>{item?.description}</Typography.Paragraph>
                                 <Typography.Paragraph>{item?.price?.toString()} $</Typography.Paragraph>
-
+                        </Link>
                             <ButtonCart productId={item?._id}/>
                         </Card>
-                        </Link>
+
                     </List.Item>
                 )}
             />

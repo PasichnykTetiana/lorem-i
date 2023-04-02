@@ -1,6 +1,6 @@
 import "./Header.less";
 import { Button, Col, Row, Typography, Menu, Dropdown, Space } from "antd";
-import { type FC, useContext, useState } from "react";
+import {type FC, useContext, useEffect, useState} from "react";
 import { Link, NavLink } from "react-router-dom";
 import img from "./img/logo.png";
 import { ShoppingOutlined } from '@ant-design/icons';
@@ -18,6 +18,12 @@ const Header: FC = () => {
   const handleOpenChange = (flag: boolean) => {
     setOpen(flag);
   };
+  useEffect(() => {
+    if (localStorage.getItem("token") && !store.isLoading) {
+      store.checkCart();
+    }
+    console.log(store.cart.length)
+  }, []);
   const data = [{ title: "About us", href: "/about" }];
   const items: MenuProps["items"] = [
     {
@@ -83,7 +89,7 @@ const Header: FC = () => {
                 <Col >
                   <ShoppingOutlined />
                   <Typography.Paragraph style={{margin: 0}}>
-                    (0)
+                    ({store.cart.length})
                   </Typography.Paragraph>
 
                   {/*<Typography.Title level={5}>*/}

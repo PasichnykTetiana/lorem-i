@@ -16,7 +16,7 @@ const DefaultLayout: FC = () => {
   useEffect(() => {
     if (localStorage.getItem("token") && !store.isLoading) {
       store.checkAuth();
-        console.log(store.user)
+      store.checkCart();
     }
   }, []);
 
