@@ -11,9 +11,16 @@ type User = {
   id: string;
 };
 
+type Cart = {
+  _id?: string;
+  product?: string;
+  quantity?: number;
+
+};
+
 type CartResponse = {
   user: string;
-  products: string[];
+  products: Cart[];
 };
 
 type AuthResponse = {
