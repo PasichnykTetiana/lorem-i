@@ -40,30 +40,30 @@ const Home: FC = () => {
 
   return (
     <>
-      {/*<SectionContainer>*/}
+      <SectionContainer>
       <Shop />
-      {/*  <Carousel*/}
-      {/*    effect="fade"*/}
-      {/*    style={{ maxWidth: "100vw" }}*/}
-      {/*    dots={!isMD ? { className: "carousel" } : false}*/}
-      {/*    arrows={isMD && true}*/}
-      {/*    prevArrow={<SvgIcon fill={"#b6acf0"} type={"arrowPrev"} />}*/}
-      {/*    nextArrow={<SvgIcon fill={"#b6acf0"} type={"arrowNext"} />}*/}
-      {/*  >*/}
-      {/*    {hero.map((it, i) => (*/}
-      {/*      <HeroSection*/}
-      {/*        key={i}*/}
-      {/*        img={it.img}*/}
-      {/*        title={it.title}*/}
-      {/*        subtitle={it.subtitle}*/}
-      {/*      />*/}
-      {/*    ))}*/}
-      {/*  </Carousel>*/}
-      {/*</SectionContainer>*/}
-      {/*<Card />*/}
-      {/*<SectionContainer theme={"grey"}>*/}
-      {/*  <Bats />*/}
-      {/*</SectionContainer>*/}
+        <Carousel
+          effect="fade"
+          style={{ maxWidth: "100vw" }}
+          dots={!isMD ? { className: "carousel" } : false}
+          arrows={isMD && true}
+          prevArrow={<SvgIcon fill={"#b6acf0"} type={"arrowPrev"} />}
+          nextArrow={<SvgIcon fill={"#b6acf0"} type={"arrowNext"} />}
+        >
+          {hero.map((it, i) => (
+            <HeroSection
+              key={i}
+              img={it.img}
+              title={it.title}
+              subtitle={it.subtitle}
+            />
+          ))}
+        </Carousel>
+      </SectionContainer>
+      <Card />
+      <SectionContainer theme={"grey"}>
+        <Bats />
+      </SectionContainer>
     </>
   );
 };
