@@ -41,7 +41,7 @@ const Home: FC = () => {
   return (
     <>
       {/*<SectionContainer>*/}
-        <Shop />
+      <Shop />
       {/*  <Carousel*/}
       {/*    effect="fade"*/}
       {/*    style={{ maxWidth: "100vw" }}*/}

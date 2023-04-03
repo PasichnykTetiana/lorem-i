@@ -15,7 +15,6 @@ type Cart = {
   _id?: string;
   product?: string;
   quantity: number;
-
 };
 
 type CartResponse = {

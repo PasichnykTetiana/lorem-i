@@ -14,10 +14,14 @@ class CartService {
     const userId = userData.id;
     const productObjectId = mongoose.Types.ObjectId(productId);
 
-    let cart = await cartModel.findOne({ user: userId }).populate("products.product");
+    let cart = await cartModel
+      .findOne({ user: userId })
+      .populate("products.product");
 
     if (cart) {
-      const productIndex = cart.products.findIndex(p => p.product.equals(productObjectId));
+      const productIndex = cart.products.findIndex((p) =>
+        p.product.equals(productObjectId)
+      );
       if (productIndex !== -1) {
         cart.products[productIndex].quantity++;
       } else {
@@ -31,14 +35,14 @@ class CartService {
       });
     }
 
-  //   cart.populate("products.product");
-  //   const populatedCart = await cart.exec()
-  //   const productsWithQuantity = populatedCart.products.map(p => ({
-  //     name: p.product.name,
-  //     quantity: p.quantity
-  //   }));
-  //
-  //   return { products: productsWithQuantity };
+    //   cart.populate("products.product");
+    //   const populatedCart = await cart.exec()
+    //   const productsWithQuantity = populatedCart.products.map(p => ({
+    //     name: p.product.name,
+    //     quantity: p.quantity
+    //   }));
+    //
+    //   return { products: productsWithQuantity };
   }
 
   async getCart(refreshToken) {
