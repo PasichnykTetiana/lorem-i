@@ -93,14 +93,11 @@ export default class Store {
   }
 
   async checkCart() {
-    console.log("jijijijji");
-    // this.setLoading(true);
     try {
       const response = await axios.get<CartResponse>(`${API_URL}/cart`, {
         withCredentials: true,
       });
       this.setCart(response.data.products);
-      console.log(response.data.products, "products");
     } catch (e) {
       console.log(e);
     } finally {

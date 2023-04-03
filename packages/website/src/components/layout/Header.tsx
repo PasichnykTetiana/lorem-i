@@ -47,7 +47,6 @@ const Header: FC = () => {
     return (
         <>
             <Row wrap={false} align={"middle"} justify={"space-between"}>
-
                 <Col span={isSM ? 3 : 6}>
                     <Link to={"/"}>
                         {isDesktop ? <img width={"50%"} src={img}/> : <Navigation/>}
@@ -71,7 +70,10 @@ const Header: FC = () => {
                             <Cart/>
                             <Col>
                                 <Typography.Paragraph style={{margin: 0}}>
-                                    ({store.cart.length})
+                                   ({store.cart ? store.cart.reduce(function(sum, current) {
+                                        return sum + current.quantity;
+                                    }, 0) : 0})
+                                    {/*({store.cart.length})*/}
                                 </Typography.Paragraph>
                             </Col>
                             <Col>

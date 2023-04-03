@@ -14,7 +14,7 @@ type User = {
 type Cart = {
   _id?: string;
   product?: string;
-  quantity?: number;
+  quantity: number;
 
 };
 
