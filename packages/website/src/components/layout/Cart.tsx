@@ -10,7 +10,7 @@ import {Context} from "../app";
 import { toJS } from 'mobx';
 const Cart: FC = () => {
     const [isModalOpen, setIsModalOpen] = useState(false);
-    const [product, setProduct] = useState<Partial<Product[]>>([])
+    const [product, setProduct] = useState<Product[]>([])
     const {store} = useContext(Context);
 
     const showModal = () => {
@@ -47,22 +47,32 @@ const Cart: FC = () => {
         setProduct(cards)
     }, []);
 
+    console.log(toJS(store.cart[1]))
+
     return (
         <Col>
             <ShoppingOutlined style={{color: '#01e0b7'}} onClick={showModal}/>
-            <Modal title="Cart" open={isModalOpen} onOk={handleOk} onCancel={handleCancel}>
-                {product.map((item?: Product, index?: number) => {
-                    return (<Row justify={'center'}>
-                        <Col style={{justifyContent: 'center', alignItems: 'center', display: 'flex', flexDirection: 'column'}} span={24}>
-                        <img style={{width: "80%"}} src={item?.photo}/>
+            <Modal width={"80%"} style={{maxWidth: 800}} title="Cart" open={isModalOpen} onOk={handleOk} onCancel={handleCancel}>
+                {product.map((item: Product, index) => {
+                    return (<Row gutter={[40, 0]} justify={'center'}>
+                        <Col span={6}>
+                            <img style={{width: "100%"}} src={item?.photo}/>
+                        </Col>
+                        <Col span={12} style={{display: 'flex', flexDirection: 'column'}}>
                         <Typography.Title level={3}>{item?.title}</Typography.Title>
                         <Typography.Paragraph type={"secondary"}>
                             {item?.description}
                         </Typography.Paragraph>
-                        <Typography.Paragraph>
-                            {item?.price?.toString()} $
-                        </Typography.Paragraph>
-                    </Col></Row>)
+                            <Typography.Paragraph>
+                                quantity :  {store.cart[index].quantity.toString()}
+                            </Typography.Paragraph>
+                        </Col>
+                        <Col span={6}>
+                            <Typography.Paragraph>
+                                {(store.cart[index].quantity * item.price).toString()} $
+                            </Typography.Paragraph>
+                        </Col>
+                    </Row>)
                 })}
             </Modal>
         </Col>
