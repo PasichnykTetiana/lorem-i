@@ -7,7 +7,7 @@ import "./Cart.less";
 import ContentService from "../../services/ContentServices";
 import {useParams} from "react-router-dom";
 import {Context} from "../app";
-
+import { toJS } from 'mobx';
 const Cart: FC = () => {
     const [isModalOpen, setIsModalOpen] = useState(false);
     const [product, setProduct] = useState<Partial<Product[]>>([])
@@ -31,7 +31,7 @@ const Cart: FC = () => {
         async function getProducts() {
             try {
                 for (const item of store.cart) {
-                    const response = await ContentService.fetchProduct(item);
+                    const response = await ContentService.fetchProduct(item.product);
                     cardData.push(response.data);
                 }
             } catch (e) {
@@ -47,11 +47,9 @@ const Cart: FC = () => {
         setProduct(cards)
     }, []);
 
-    console.log(cards)
-
     return (
         <Col>
-            <ShoppingOutlined onClick={showModal}/>
+            <ShoppingOutlined style={{color: '#01e0b7'}} onClick={showModal}/>
             <Modal title="Cart" open={isModalOpen} onOk={handleOk} onCancel={handleCancel}>
                 {product.map((item?: Product, index?: number) => {
                     return (<Row justify={'center'}>

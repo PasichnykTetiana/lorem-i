@@ -15,20 +15,30 @@ class CartService {
     const userId = userData.id;
     const productObjectId = mongoose.Types.ObjectId(productId);
 
-    const cart = await cartModel.findOne({ user: userId });
+    let cart = await cartModel.findOne({ user: userId });
+
     if (cart) {
-      await cartModel.updateOne(
-        { _id: cart._id },
-        { $addToSet: { products: productObjectId } }
-      );
-      return cart;
+      const productIndex = cart.products.findIndex(p => p.product.equals(productObjectId));
+      if (productIndex !== -1) {
+        cart.products[productIndex].quantity++;
+      } else {
+        cart.products.push({ product: productObjectId, quantity: 1 });
+      }
+      await cart.save();
     } else {
-      const newCart = await cartModel.create({
+      cart = await cartModel.create({
         user: userId,
-        products: [productObjectId],
+        products: [{ product: productObjectId, quantity: 1 }],
       });
-      return newCart;
     }
+
+    const populatedCart = await cart.populate("products.product").execPopulate();
+    const productsWithQuantity = populatedCart.products.map(p => ({
+      name: p.product.name,
+      quantity: p.quantity
+    }));
+
+    return { products: productsWithQuantity };
   }
 
   async getCart(refreshToken) {

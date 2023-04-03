@@ -9,7 +9,7 @@ export default class Store {
   user = {} as User;
   userName = "" as string;
   isLoading = false;
-  cart = [] as string[];
+  cart = [] as Cart[];
 
   constructor() {
     makeAutoObservable(this);
@@ -27,7 +27,7 @@ export default class Store {
     this.user = user;
   }
 
-  setCart(cart: string[]) {
+  setCart(cart: Cart[]) {
     this.cart = cart;
   }
 
