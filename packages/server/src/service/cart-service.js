@@ -2,7 +2,6 @@ const tokenService = require("./token-service");
 const ApiError = require("../exceptions/api-error");
 const cartModel = require("../models/cart-model");
 const mongoose = require("mongoose");
-const UserModel = require("../models/user-model");
 
 class CartService {
   async addToCart(productId, refreshToken) {
@@ -15,7 +14,7 @@ class CartService {
     const userId = userData.id;
     const productObjectId = mongoose.Types.ObjectId(productId);
 
-    let cart = await cartModel.findOne({ user: userId });
+    let cart = await cartModel.findOne({ user: userId }).populate("products.product");
 
     if (cart) {
       const productIndex = cart.products.findIndex(p => p.product.equals(productObjectId));
@@ -32,13 +31,14 @@ class CartService {
       });
     }
 
-    const populatedCart = await cart.populate("products.product").exec();
-    const productsWithQuantity = populatedCart.products.map(p => ({
-      name: p.product.name,
-      quantity: p.quantity
-    }));
-
-    return { products: productsWithQuantity };
+  //   cart.populate("products.product");
+  //   const populatedCart = await cart.exec()
+  //   const productsWithQuantity = populatedCart.products.map(p => ({
+  //     name: p.product.name,
+  //     quantity: p.quantity
+  //   }));
+  //
+  //   return { products: productsWithQuantity };
   }
 
   async getCart(refreshToken) {
