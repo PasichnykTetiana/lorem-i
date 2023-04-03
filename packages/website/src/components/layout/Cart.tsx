@@ -1,13 +1,11 @@
 import {Col, Typography} from "antd";
-import {type FC, useContext, useMemo, useEffect} from "react";
+import {type FC, useContext, useEffect} from "react";
 import {ShoppingOutlined} from "@ant-design/icons";
 import {useState} from 'react';
 import {Modal, Row} from 'antd';
 import "./Cart.less";
 import ContentService from "../../services/ContentServices";
-import {useParams} from "react-router-dom";
 import {Context} from "../app";
-import { toJS } from 'mobx';
 const Cart: FC = () => {
     const [isModalOpen, setIsModalOpen] = useState(false);
     const [product, setProduct] = useState<Product[]>([])
@@ -25,36 +23,28 @@ const Cart: FC = () => {
         setIsModalOpen(false);
     };
 
-    const cards = useMemo(() => {
-        const cardData = [] as any;
-
+    useEffect(() => {
+        const cardData = [] as any
         async function getProducts() {
             try {
                 for (const item of store.cart) {
                     const response = await ContentService.fetchProduct(item.product);
-                    cardData.push(response.data);
+                     cardData.push(response.data);
                 }
             } catch (e) {
                 console.log(e);
             }
         }
-
+        setProduct(cardData)
         getProducts();
-        return cardData;
-    }, []);
-
-    useEffect(() => {
-        setProduct(cards)
-    }, []);
-
-    console.log(toJS(store.cart[1]))
+    }, [store.cart]);
 
     return (
         <Col>
             <ShoppingOutlined style={{color: '#01e0b7'}} onClick={showModal}/>
             <Modal width={"80%"} style={{maxWidth: 800}} title="Cart" open={isModalOpen} onOk={handleOk} onCancel={handleCancel}>
-                {product.map((item: Product, index) => {
-                    return (<Row gutter={[40, 0]} justify={'center'}>
+                {product?.map((item: Product, index) => {
+                    return (<Row key={item._id} gutter={[40, 0]} justify={'center'}>
                         <Col span={6}>
                             <img style={{width: "100%"}} src={item?.photo}/>
                         </Col>
