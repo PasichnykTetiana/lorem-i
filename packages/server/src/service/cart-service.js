@@ -32,7 +32,7 @@ class CartService {
       });
     }
 
-    const populatedCart = await cart.populate("products.product").execPopulate();
+    const populatedCart = await cart.populate("products.product").exec();
     const productsWithQuantity = populatedCart.products.map(p => ({
       name: p.product.name,
       quantity: p.quantity
