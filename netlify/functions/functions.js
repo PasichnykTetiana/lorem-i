@@ -34,6 +34,15 @@ exports.handler = async (event) => {
 
     const { path } = event;
 
+
+    function getRefreshToken(cookieHeader) {
+      const cookies = cookieHeader ? cookieHeader.split(";") : [];
+      const refreshTokenCookie = cookies.find((cookie) =>
+          cookie.includes("refreshToken")
+      );
+      return refreshTokenCookie ? refreshTokenCookie.split("=")[1] : null;
+    }
+
     if (
       event.httpMethod === "GET" &&
       path === "/.netlify/functions/functions/api/products"
@@ -57,17 +66,10 @@ exports.handler = async (event) => {
       app.use(authMiddleware);
       result = await userService.getAllUsers();
     } else if (
-      event.httpMethod === "GET" &&
-      path.startsWith("/.netlify/functions/functions/api/refresh")
+        event.httpMethod === "GET" &&
+        path.startsWith("/.netlify/functions/functions/api/refresh")
     ) {
-      const cookieHeader = event.headers.cookie;
-      const cookies = cookieHeader ? cookieHeader.split(";") : [];
-      const refreshTokenCookie = cookies.find((cookie) =>
-        cookie.includes("refreshToken")
-      );
-      const refreshToken = refreshTokenCookie
-        ? refreshTokenCookie.split("=")[1]
-        : null;
+      const refreshToken = getRefreshToken(event.headers.cookie);
       result = await userService.refresh(refreshToken);
     } else if (
       event.httpMethod === "GET" &&
@@ -87,17 +89,10 @@ exports.handler = async (event) => {
       const { email, password } = JSON.parse(event.body);
       result = await userService.login(email, password);
     } else if (
-      event.httpMethod === "GET" &&
-      path.startsWith("/.netlify/functions/functions/api/cart")
+        event.httpMethod === "GET" &&
+        path.startsWith("/.netlify/functions/functions/api/cart")
     ) {
-      const cookieHeader = event.headers.cookie;
-      const cookies = cookieHeader ? cookieHeader.split(";") : [];
-      const refreshTokenCookie = cookies.find((cookie) =>
-        cookie.includes("refreshToken")
-      );
-      const refreshToken = refreshTokenCookie
-        ? refreshTokenCookie.split("=")[1]
-        : null;
+      const refreshToken = getRefreshToken(event.headers.cookie);
       result = await cartService.getCart(refreshToken);
     } else if (
       event.httpMethod === "POST" &&
@@ -115,7 +110,7 @@ exports.handler = async (event) => {
       result = await cartService.updateCartItem(id, refreshToken, 1);
     }
     else if (
-        event.httpMethod === "POST" &&
+        event.httpMethod === "DELETE" &&
         path.startsWith("/.netlify/functions/functions/api/cart/delete/")
     ) {
       const id = path.split("/").pop();
