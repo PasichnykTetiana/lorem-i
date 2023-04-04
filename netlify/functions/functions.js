@@ -99,14 +99,7 @@ exports.handler = async (event) => {
       path.startsWith("/.netlify/functions/functions/api/cart/add/")
     ) {
       const id = path.split("/").pop();
-      const cookieHeader = event.headers.cookie;
-      const cookies = cookieHeader ? cookieHeader.split(";") : [];
-      const refreshTokenCookie = cookies.find((cookie) =>
-        cookie.includes("refreshToken")
-      );
-      const refreshToken = refreshTokenCookie
-        ? refreshTokenCookie.split("=")[1]
-        : null;
+      const refreshToken = getRefreshToken(event.headers.cookie);
       result = await cartService.updateCartItem(id, refreshToken, 1);
     }
     else if (
@@ -114,14 +107,7 @@ exports.handler = async (event) => {
         path.startsWith("/.netlify/functions/functions/api/cart/delete/")
     ) {
       const id = path.split("/").pop();
-      const cookieHeader = event.headers.cookie;
-      const cookies = cookieHeader ? cookieHeader.split(";") : [];
-      const refreshTokenCookie = cookies.find((cookie) =>
-          cookie.includes("refreshToken")
-      );
-      const refreshToken = refreshTokenCookie
-          ? refreshTokenCookie.split("=")[1]
-          : null;
+      const refreshToken = getRefreshToken(event.headers.cookie);
       result = await cartService.updateCartItem(id, refreshToken, -1);
     }
     if (result.refreshToken) {
