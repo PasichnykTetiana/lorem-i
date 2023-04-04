@@ -18,6 +18,8 @@ router.post(
 router.post("/login", userController.login);
 router.post("/logout", userController.logout);
 router.post("/cart/add/:id", cartController.addToCart);
+router.delete("/cart/delete/:id", cartController.removeFromCart);
+// router.post("/cart/add/:id", cartController.addToCart);
 router.get("/cart", cartController.getCart);
 router.get("/activate/:link", userController.activate);
 router.get("/refresh", userController.refresh);

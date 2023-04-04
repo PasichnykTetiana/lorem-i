@@ -112,7 +112,22 @@ exports.handler = async (event) => {
       const refreshToken = refreshTokenCookie
         ? refreshTokenCookie.split("=")[1]
         : null;
-      result = await cartService.addToCart(id, refreshToken);
+      result = await cartService.updateCartItem(id, refreshToken, 1);
+    }
+    else if (
+        event.httpMethod === "POST" &&
+        path.startsWith("/.netlify/functions/functions/api/cart/delete/")
+    ) {
+      const id = path.split("/").pop();
+      const cookieHeader = event.headers.cookie;
+      const cookies = cookieHeader ? cookieHeader.split(";") : [];
+      const refreshTokenCookie = cookies.find((cookie) =>
+          cookie.includes("refreshToken")
+      );
+      const refreshToken = refreshTokenCookie
+          ? refreshTokenCookie.split("=")[1]
+          : null;
+      result = await cartService.updateCartItem(id, refreshToken, -1);
     }
     if (result.refreshToken) {
       return {

@@ -4,10 +4,13 @@ import { Context } from "../app";
 import CartService from "../../services/CartServices";
 
 type ButtonCart = {
-  productId: string;
+  productId?: string;
+  type?: "link" | "text" | "ghost" | "default" | "primary" | "dashed";
+  description?: string
+  option?: string
 };
 
-const ButtonCart: FC<Partial<ButtonCart>> = ({ productId }) => {
+const ButtonCart: FC<Partial<ButtonCart>> = ({description = 'Add', option, type='primary', productId }) => {
   const { store } = useContext(Context);
 
   async function addCart(productId?: string) {
@@ -20,15 +23,24 @@ const ButtonCart: FC<Partial<ButtonCart>> = ({ productId }) => {
       store.checkCart();
     }
   }
-
+  async function deleteCartProduct(productId?: string) {
+    try {
+      const response = await CartService.deleteCartProduct(productId);
+      console.log(response.data);
+    } catch (e) {
+      console.log(e);
+    } finally {
+      store.checkCart();
+    }
+  }
   return (
     <Button
-      type="primary"
+      type={type}
       onClick={async () => {
-        await addCart(productId);
+        await  option === 'add' ? addCart(productId) : deleteCartProduct(productId);
       }}
     >
-      Add
+      {description}
     </Button>
   );
 };

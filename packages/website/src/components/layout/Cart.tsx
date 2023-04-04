@@ -6,9 +6,11 @@ import { Modal, Row } from "antd";
 import "./Cart.less";
 import ContentService from "../../services/ContentServices";
 import { Context } from "../app";
+import { ButtonCart } from "./ButtonCart";
+
 const Cart: FC = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const [product, setProduct] = useState<Product[]>([]);
+  const [product, setProduct] = useState<Partial<Product[]>>([]);
   const { store } = useContext(Context);
 
   const showModal = () => {
@@ -24,20 +26,26 @@ const Cart: FC = () => {
   };
 
   useEffect(() => {
-    const cardData = [] as any;
+    const cardData = [] as Product[];
     async function getProducts() {
       try {
         for (const item of store.cart) {
           const response = await ContentService.fetchProduct(item.product);
+          console.log(response.data, 'response.data')
           cardData.push(response.data);
         }
       } catch (e) {
         console.log(e);
       }
+      finally {
+        setProduct(cardData);
+      }
     }
-    setProduct(cardData);
     getProducts();
-  }, [store.cart]);
+    if(store.cart.length === 0){
+      setIsModalOpen(false);
+    }
+  }, [store.cart.length]);
 
   return (
     <Col>
@@ -50,9 +58,9 @@ const Cart: FC = () => {
         onOk={handleOk}
         onCancel={handleCancel}
       >
-        {product?.map((item: Product, index) => {
+        {product.map((item?: Product, index?) => {
           return (
-            <Row key={item._id} gutter={[40, 0]} justify={"center"}>
+            <Row key={item?._id} gutter={[40, 0]} justify={"center"}>
               <Col span={6}>
                 <img style={{ width: "100%" }} src={item?.photo} />
               </Col>
@@ -65,12 +73,14 @@ const Cart: FC = () => {
                   {item?.description}
                 </Typography.Paragraph>
                 <Typography.Paragraph>
-                  quantity : {store.cart[index].quantity.toString()}
+                  <ButtonCart description={'-'} option={'delete'} type={'ghost'} productId={store.cart[index]?.product}/>
+                  &nbsp;{store.cart[index]?.quantity.toString()}&nbsp;
+                  <ButtonCart description={'+'} option={'add'} type={'ghost'} productId={store.cart[index]?.product}/>
                 </Typography.Paragraph>
               </Col>
               <Col span={6}>
                 <Typography.Paragraph>
-                  {(store.cart[index].quantity * item.price).toString()} $
+                  {item && (store.cart[index]?.quantity * item.price).toString()} $
                 </Typography.Paragraph>
               </Col>
             </Row>
