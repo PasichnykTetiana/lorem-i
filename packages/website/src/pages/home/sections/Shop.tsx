@@ -80,7 +80,7 @@ const Shop: FC = () => {
                     {item?.price?.toString()} $
                   </Typography.Paragraph>
                 </Link>
-                <ButtonCart productId={item?._id} />
+                <ButtonCart option={'add'} productId={item?._id} />
               </Card>
             </List.Item>
           );
