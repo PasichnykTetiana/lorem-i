@@ -6,8 +6,9 @@ const mongoose = require("mongoose");
 class CartService {
   async updateCartItem(productId, refreshToken, quantityDelta) {
     const userData = tokenService.validateRefreshToken(refreshToken);
+    const tokenFromDb = await tokenService.findToken(refreshToken);
 
-    if (!userData) {
+    if (!userData || !tokenFromDb) {
       throw ApiError.BadRequest("User is not found");
     }
 
