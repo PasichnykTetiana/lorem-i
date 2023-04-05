@@ -42,7 +42,13 @@ exports.handler = async (event) => {
       );
       return refreshTokenCookie ? refreshTokenCookie.split("=")[1] : null;
     }
-
+    function getCartId(cookieHeader) {
+      const cookies = cookieHeader ? cookieHeader.split(";") : [];
+      const refreshTokenCookie = cookies.find((cookie) =>
+          cookie.includes("cartId")
+      );
+      return refreshTokenCookie ? refreshTokenCookie.split("=")[1] : null;
+    }
     if (
       event.httpMethod === "GET" &&
       path === "/.netlify/functions/functions/api/products"
@@ -93,14 +99,16 @@ exports.handler = async (event) => {
         path.startsWith("/.netlify/functions/functions/api/cart")
     ) {
       const refreshToken = getRefreshToken(event.headers.cookie);
-      result = await cartService.getCart(refreshToken);
+      const cartId = getCartId(event.headers.cookie);
+      result = await cartService.getCart(refreshToken, cartId);
     } else if (
       event.httpMethod === "POST" &&
       path.startsWith("/.netlify/functions/functions/api/cart/add/")
     ) {
       const id = path.split("/").pop();
       const refreshToken = getRefreshToken(event.headers.cookie);
-      result = await cartService.updateCartItem(id, refreshToken, 1);
+      const cartId = getCartId(event.headers.cookie);
+      result = await cartService.updateCartItem(id, refreshToken, cartId, 1);
     }
     else if (
         event.httpMethod === "DELETE" &&
@@ -108,7 +116,8 @@ exports.handler = async (event) => {
     ) {
       const id = path.split("/").pop();
       const refreshToken = getRefreshToken(event.headers.cookie);
-      result = await cartService.updateCartItem(id, refreshToken, -1);
+      const cartId = getCartId(event.headers.cookie);
+      result = await cartService.updateCartItem(id, refreshToken, cartId, -1);
     }
     if (result.refreshToken) {
       return {
