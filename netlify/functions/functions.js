@@ -126,6 +126,15 @@ exports.handler = async (event) => {
           "Set-Cookie": `refreshToken=${result.refreshToken};Max-Age=2592000; HttpOnly; Path=/; Domain=${process.env.DOMAIN};`,
           "Content-Type": "application/json",
         },
+                body: JSON.stringify(result),
+            };
+        } else if (result.sessionId) {
+            return {
+                statusCode: 200,
+                headers: {
+                    "Set-Cookie": `cartId=${result._id};Max-Age=2592000; HttpOnly; Path=/; Domain=${process.env.DOMAIN};`,
+                    "Content-Type": "application/json",
+                },
         body: JSON.stringify(result),
       };
     } else {
