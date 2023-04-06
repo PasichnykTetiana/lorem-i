@@ -2,9 +2,17 @@
 @import "../../../styles/styles";
 
 #root {
-  .ant-list-item {
-    height: 430px;
-  }
+  .shop {
+    margin-bottom: 117px;
+    margin-top: 156px;
+    .ant-row {
+      align-items: stretch;
+
+    }
+    .ant-list-item {
+      height: 570px;
+    }
+
   .ant-list-pagination {
     margin: 0;
   }
@@ -35,7 +43,11 @@
     .animationCard();
     display: block;
   }
-
+    .img {
+      border-radius: 0;
+      height: 350px;
+      width: fit-content;
+    }
   .product-card {
     .ant-card:hover {
       button {
@@ -52,20 +64,39 @@
     .ant-typography {
       margin-bottom: @margin-sm;
     }
-    .img {
-      border-radius: 0;
-    }
+
     margin-bottom: 117px;
   }
   h3 {
     margin-top: @margin-md;
   }
   @media only screen and (max-width: @screen-xs) {
+
+    .ant-list-pagination {
+      margin-top: 56px;
+    }
     .product-card {
-      margin-bottom: 0;
+      margin-bottom: 0;;
     }
     .ant-list-item {
-      height: 330px;
+      height: 510px;
     }
+    .img {
+      height: fit-content;
+      width: 100%;
+    }
+  }
+    @media only screen and (max-width: @screen-md) {
+      .ant-row{
+        justify-content: center;
+        text-align: center;
+      }
+      button {
+        margin: 0 auto;
+      }
+
+    }
+
+
   }
 }

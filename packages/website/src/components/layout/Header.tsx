@@ -48,9 +48,9 @@ const Header: FC = () => {
         <>
             <Row wrap={false} align={"middle"} justify={"space-between"}>
                 <Col span={isSM ? 3 : 6}>
-                    <Link to={"/"}>
-                        {isDesktop ? <img width={"50%"} src={img}/> : <Navigation/>}
-                    </Link>
+
+                        {isDesktop ? <Link to={"/"}><img width={"50%"} src={img}/> </Link>: <Navigation/>}
+
                 </Col>
                 <Col
                     style={{
@@ -60,7 +60,7 @@ const Header: FC = () => {
                     }}
                     span={isSM ? 10 : 12}
                 >
-                    {isDesktop ? <Navigation/> : <img width={"50%"} src={img}/>}
+                    {isDesktop ? <Navigation/> :<Link style={{display: "flex", justifyContent: "center"}} to={"/"}> <img width={"50%"} src={img}/> </Link>}
                 </Col>
                 <Col style={{justifyContent: "end"}} span={isSM ? 11 : 6}>
                     <Row gutter={8} justify={"space-between"}>

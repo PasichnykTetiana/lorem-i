@@ -41,24 +41,25 @@ const Home: FC = () => {
   return (
     <>
       <SectionContainer>
-      <Shop />
         <Carousel
-          effect="fade"
-          style={{ maxWidth: "100vw" }}
-          dots={!isMD ? { className: "carousel" } : false}
-          arrows={isMD && true}
-          prevArrow={<SvgIcon fill={"#b6acf0"} type={"arrowPrev"} />}
-          nextArrow={<SvgIcon fill={"#b6acf0"} type={"arrowNext"} />}
+            effect="fade"
+            style={{ maxWidth: "100vw" }}
+            dots={!isMD ? { className: "carousel" } : false}
+            arrows={isMD && true}
+            prevArrow={<SvgIcon fill={"#b6acf0"} type={"arrowPrev"} />}
+            nextArrow={<SvgIcon fill={"#b6acf0"} type={"arrowNext"} />}
         >
           {hero.map((it, i) => (
-            <HeroSection
-              key={i}
-              img={it.img}
-              title={it.title}
-              subtitle={it.subtitle}
-            />
+              <HeroSection
+                  key={i}
+                  img={it.img}
+                  title={it.title}
+                  subtitle={it.subtitle}
+              />
           ))}
         </Carousel>
+      <Shop />
+
       </SectionContainer>
       <Card />
       <SectionContainer theme={"grey"}>

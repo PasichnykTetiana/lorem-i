@@ -1,6 +1,6 @@
 import "./Shop.less";
 
-import { List, Typography, Card } from "antd";
+import { List, Typography, Card, Row, Col } from "antd";
 import { Link } from "react-router-dom";
 import { type FC, useEffect, useState, CSSProperties } from "react";
 import SectionContainer from "../../../components/section/SectionContainer";
@@ -27,10 +27,17 @@ const Shop: FC = () => {
   }, []);
 
   return (
-    <SectionContainer>
+      <Row className={"shop"}>
+          <Col>
+            <Typography.Title level={1}>
+                Rubber ducks
+            </Typography.Title>
+          </Col>
+
       <List
         style={{ maxWidth: "100% " }}
         itemLayout="vertical"
+
         size="large"
         dataSource={cards || []}
         grid={{
@@ -67,14 +74,13 @@ const Shop: FC = () => {
                 <Link style={linkStyles} to={`/product/${item?._id}`}>
                   {item.photo && (
                     <img
-                      style={{ width: "100%" }}
                       src={item.photo}
                       className="img"
                     />
                   )}
                   <Typography.Title level={3}>{item?.title}</Typography.Title>
                   <Typography.Paragraph type={"secondary"}>
-                    {item?.description}
+                    {item?.subtitle}
                   </Typography.Paragraph>
                   <Typography.Paragraph>
                     {item?.price?.toString()} $
@@ -86,7 +92,7 @@ const Shop: FC = () => {
           );
         }}
       />
-    </SectionContainer>
+      </Row>
   );
 };
 
