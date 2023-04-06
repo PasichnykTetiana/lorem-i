@@ -1,16 +1,13 @@
 import { FC, useState } from "react";
 import {
-  Col,
-  Dropdown,
   Menu,
   MenuProps,
   Row,
-  Button,
   Drawer,
+  Button,
   Typography,
 } from "antd";
 import { Link, NavLink } from "react-router-dom";
-// import './Navigation.less'
 import { MenuOutlined } from "@ant-design/icons";
 import { useBreakpoints } from "../screen";
 import { SvgIcon } from "../icon/SvgIcon";
@@ -32,11 +29,11 @@ const NavigationMenu: FC<Partial<MenuProps>> = ({ ...props }) => (
       >
         <SvgIcon type={"dot"} />
         <Menu.Item>
-          <Link to={it?.href}>
+          <NavLink to={it?.href}>
             <Typography.Title style={{ margin: 0 }} level={5}>
               {it?.title}
             </Typography.Title>
-          </Link>
+          </NavLink>
         </Menu.Item>
         <SvgIcon type={"dot"} />
       </div>
@@ -66,10 +63,10 @@ const Navigation: FC = () => {
             title="Menu"
             width={isSM ? "100%" : "50%"}
             placement="right"
-            closable={true}
             visible={visible}
             onClose={() => {
               setVisible(false);
+
             }}
           >
             <NavigationMenu
@@ -79,6 +76,7 @@ const Navigation: FC = () => {
               mode={"vertical"}
             />
           </Drawer>
+
         </Row>
       )}
     </Row>

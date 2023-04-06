@@ -9,7 +9,7 @@ import ContentService from "../../services/ContentServices";
 
 const Product: FC = () => {
   const { id } = useParams();
-  const [card, setCard] = useState<Product>({});
+  const [card, setCard] = useState<Partial<Product>>({});
 
   useEffect(() => {
     async function getProducts(x: string) {
@@ -37,9 +37,7 @@ const Product: FC = () => {
         {/* /> */}
         {card.title}
         <br />
-
-        {id}
-        {card.title}
+        {card.description}
       </SectionContainer>
       <SectionContainer>{/* <We /> */}</SectionContainer>
     </>

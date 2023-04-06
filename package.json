@@ -20,6 +20,7 @@
   },
   "scripts": {
     "start": "concurrently 'yarn:start:server' 'yarn:start:website'",
+    "netlify": "netlify dev",
     "start:server": "yarn workspace @lorem-i/server run dev",
     "start:website": "yarn workspace @lorem-i/website run start",
     "fix": " yarn prettier --write packages && yarn lint:scripts . --fix packages/**/*.{ts,tsx}",
