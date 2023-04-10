@@ -7,96 +7,91 @@
     margin-top: 156px;
     .ant-row {
       align-items: stretch;
-
     }
     .ant-list-item {
       height: 570px;
     }
 
-  .ant-list-pagination {
-    margin: 0;
-  }
-  .ant-pagination {
-    li,
-    button {
-      background: @color-green;
-      border: 1px solid @color-deep-green;
+    .ant-list-pagination {
+      margin: 0;
     }
-    .ant-pagination-next:not(.ant-pagination-disabled),
-    .ant-pagination-prev:not(.ant-pagination-disabled) {
-      .ant-pagination-item-link {
-        color: black;
+    .ant-pagination {
+      li,
+      button {
+        background: @color-green;
+        border: 1px solid @color-deep-green;
+      }
+      .ant-pagination-next:not(.ant-pagination-disabled),
+      .ant-pagination-prev:not(.ant-pagination-disabled) {
+        .ant-pagination-item-link {
+          color: black;
+        }
+      }
+      .ant-pagination-item {
+        a {
+          color: black;
+        }
+      }
+      .ant-pagination-item-active {
+        a {
+          color: @color-deep-green;
+        }
       }
     }
-    .ant-pagination-item {
-      a {
-        color: black;
-      }
+    .product-card-click {
+      .animationCard();
+      display: block;
     }
-    .ant-pagination-item-active {
-      a {
-        color: @color-deep-green;
-      }
-    }
-  }
-  .product-card-click {
-    .animationCard();
-    display: block;
-  }
     .img {
       border-radius: 0;
       height: 350px;
       width: fit-content;
     }
-  .product-card {
-    .ant-card:hover {
+    .product-card {
+      .ant-card:hover {
+        button {
+          .animationCard();
+          display: block;
+        }
+      }
       button {
-        .animationCard();
-        display: block;
+        display: none;
+        opacity: 0;
+      }
+      .animationCard();
+
+      .ant-typography {
+        margin-bottom: @margin-sm;
+      }
+
+      margin-bottom: 117px;
+    }
+    h3 {
+      margin-top: @margin-md;
+    }
+    @media only screen and (max-width: @screen-xs) {
+      .ant-list-pagination {
+        margin-top: 56px;
+      }
+      .product-card {
+        margin-bottom: 0;
+      }
+      .ant-list-item {
+        height: 510px;
+      }
+      .img {
+        height: fit-content;
+        width: 100%;
       }
     }
-    button {
-      display: none;
-      opacity: 0;
-    }
-    .animationCard();
-
-    .ant-typography {
-      margin-bottom: @margin-sm;
-    }
-
-    margin-bottom: 117px;
-  }
-  h3 {
-    margin-top: @margin-md;
-  }
-  @media only screen and (max-width: @screen-xs) {
-
-    .ant-list-pagination {
-      margin-top: 56px;
-    }
-    .product-card {
-      margin-bottom: 0;;
-    }
-    .ant-list-item {
-      height: 510px;
-    }
-    .img {
-      height: fit-content;
-      width: 100%;
-    }
-  }
     @media only screen and (max-width: @screen-md) {
-      .ant-row{
+      .ant-row {
         justify-content: center;
         text-align: center;
       }
       button {
         margin: 0 auto;
       }
-
     }
-
-
   }
 }

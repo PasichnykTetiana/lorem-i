@@ -6,8 +6,16 @@ class CartController {
     const { refreshToken } = req.cookies;
     const cartId = req.cookies.cartId;
     try {
-      const cart =  await cartService.updateCartItem(id, refreshToken,cartId, 1);
-      res.cookie("cartId", cart._id, { maxAge: 30 * 24 * 60 * 60 * 1000, httpOnly: true });
+      const cart = await cartService.updateCartItem(
+        id,
+        refreshToken,
+        cartId,
+        1
+      );
+      res.cookie("cartId", cart._id, {
+        maxAge: 30 * 24 * 60 * 60 * 1000,
+        httpOnly: true,
+      });
       res.status(200).json({ message: "Product added to cart" });
     } catch (err) {
       next(err);

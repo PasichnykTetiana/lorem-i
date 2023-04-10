@@ -34,18 +34,17 @@ exports.handler = async (event) => {
 
     const { path } = event;
 
-
     function getRefreshToken(cookieHeader) {
       const cookies = cookieHeader ? cookieHeader.split(";") : [];
       const refreshTokenCookie = cookies.find((cookie) =>
-          cookie.includes("refreshToken")
+        cookie.includes("refreshToken")
       );
       return refreshTokenCookie ? refreshTokenCookie.split("=")[1] : null;
     }
     function getCartId(cookieHeader) {
       const cookies = cookieHeader ? cookieHeader.split(";") : [];
       const refreshTokenCookie = cookies.find((cookie) =>
-          cookie.includes("cartId")
+        cookie.includes("cartId")
       );
       return refreshTokenCookie ? refreshTokenCookie.split("=")[1] : null;
     }
@@ -72,8 +71,8 @@ exports.handler = async (event) => {
       app.use(authMiddleware);
       result = await userService.getAllUsers();
     } else if (
-        event.httpMethod === "GET" &&
-        path.startsWith("/.netlify/functions/functions/api/refresh")
+      event.httpMethod === "GET" &&
+      path.startsWith("/.netlify/functions/functions/api/refresh")
     ) {
       const refreshToken = getRefreshToken(event.headers.cookie);
       result = await userService.refresh(refreshToken);
@@ -95,8 +94,8 @@ exports.handler = async (event) => {
       const { email, password } = JSON.parse(event.body);
       result = await userService.login(email, password);
     } else if (
-        event.httpMethod === "GET" &&
-        path.startsWith("/.netlify/functions/functions/api/cart")
+      event.httpMethod === "GET" &&
+      path.startsWith("/.netlify/functions/functions/api/cart")
     ) {
       const refreshToken = getRefreshToken(event.headers.cookie);
       const cartId = getCartId(event.headers.cookie);
@@ -109,10 +108,9 @@ exports.handler = async (event) => {
       const refreshToken = getRefreshToken(event.headers.cookie);
       const cartId = getCartId(event.headers.cookie);
       result = await cartService.updateCartItem(id, refreshToken, cartId, 1);
-    }
-    else if (
-        event.httpMethod === "DELETE" &&
-        path.startsWith("/.netlify/functions/functions/api/cart/delete/")
+    } else if (
+      event.httpMethod === "DELETE" &&
+      path.startsWith("/.netlify/functions/functions/api/cart/delete/")
     ) {
       const id = path.split("/").pop();
       const refreshToken = getRefreshToken(event.headers.cookie);
@@ -126,15 +124,15 @@ exports.handler = async (event) => {
           "Set-Cookie": `refreshToken=${result.refreshToken};Max-Age=2592000; HttpOnly; Path=/; Domain=${process.env.DOMAIN};`,
           "Content-Type": "application/json",
         },
-                body: JSON.stringify(result),
-            };
-        } else if (result.sessionId) {
-            return {
-                statusCode: 200,
-                headers: {
-                    "Set-Cookie": `cartId=${result._id};Max-Age=2592000; HttpOnly; Path=/; Domain=${process.env.DOMAIN};`,
-                    "Content-Type": "application/json",
-                },
+        body: JSON.stringify(result),
+      };
+    } else if (result.sessionId) {
+      return {
+        statusCode: 200,
+        headers: {
+          "Set-Cookie": `cartId=${result._id};Max-Age=2592000; HttpOnly; Path=/; Domain=${process.env.DOMAIN};`,
+          "Content-Type": "application/json",
+        },
         body: JSON.stringify(result),
       };
     } else {

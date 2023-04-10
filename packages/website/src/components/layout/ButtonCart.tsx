@@ -6,11 +6,16 @@ import CartService from "../../services/CartServices";
 type ButtonCart = {
   productId?: string;
   type?: "link" | "text" | "ghost" | "default" | "primary" | "dashed";
-  description?: string
-  option?: string
+  description?: string;
+  option?: string;
 };
 
-const ButtonCart: FC<Partial<ButtonCart>> = ({description = 'Add', option, type='primary', productId }) => {
+const ButtonCart: FC<Partial<ButtonCart>> = ({
+  description = "Add",
+  option,
+  type = "primary",
+  productId,
+}) => {
   const { store } = useContext(Context);
 
   async function addCart(productId?: string) {
@@ -37,7 +42,9 @@ const ButtonCart: FC<Partial<ButtonCart>> = ({description = 'Add', option, type=
     <Button
       type={type}
       onClick={async () => {
-        await  option === 'add' ? addCart(productId) : deleteCartProduct(productId);
+        (await option) === "add"
+          ? addCart(productId)
+          : deleteCartProduct(productId);
       }}
     >
       {description}

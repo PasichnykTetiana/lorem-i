@@ -2,8 +2,7 @@ import "./Shop.less";
 
 import { List, Typography, Card, Row, Col } from "antd";
 import { Link } from "react-router-dom";
-import { type FC, useEffect, useState, CSSProperties } from "react";
-import SectionContainer from "../../../components/section/SectionContainer";
+import { type FC, useEffect, useState, type CSSProperties } from "react";
 import { ButtonCart } from "../../../components/layout/ButtonCart";
 import { useBreakpoints } from "../../../components/screen";
 import ContentService from "../../../services/ContentServices";
@@ -12,7 +11,7 @@ const Shop: FC = () => {
   const [cards, setCards] = useState<Product[]>([]);
   const [activeIndex, setActiveIndex] = useState<number | null>(null);
 
-  const { isDesktop, isSM } = useBreakpoints();
+  const { isDesktop } = useBreakpoints();
   useEffect(() => {
     async function getProducts() {
       try {
@@ -27,17 +26,14 @@ const Shop: FC = () => {
   }, []);
 
   return (
-      <Row className={"shop"}>
-          <Col>
-            <Typography.Title level={1}>
-                Rubber ducks
-            </Typography.Title>
-          </Col>
+    <Row className={"shop"}>
+      <Col>
+        <Typography.Title level={1}>Rubber ducks</Typography.Title>
+      </Col>
 
       <List
         style={{ maxWidth: "100% " }}
         itemLayout="vertical"
-
         size="large"
         dataSource={cards || []}
         grid={{
@@ -66,18 +62,15 @@ const Shop: FC = () => {
             <List.Item
               style={index >= 1 ? { animationDelay: `0.${index}s` } : {}}
               key={item?._id}
-              onClick={() => handleClick(index)}
+              onClick={() => {
+                handleClick(index);
+              }}
               className={className}
             >
               <Card hoverable style={{ background: "transparent" }}>
                 {" "}
                 <Link style={linkStyles} to={`/product/${item?._id}`}>
-                  {item.photo && (
-                    <img
-                      src={item.photo}
-                      className="img"
-                    />
-                  )}
+                  {item.photo && <img src={item.photo} className="img" />}
                   <Typography.Title level={3}>{item?.title}</Typography.Title>
                   <Typography.Paragraph type={"secondary"}>
                     {item?.subtitle}
@@ -86,13 +79,13 @@ const Shop: FC = () => {
                     {item?.price?.toString()} $
                   </Typography.Paragraph>
                 </Link>
-                <ButtonCart option={'add'} productId={item?._id} />
+                <ButtonCart option={"add"} productId={item?._id} />
               </Card>
             </List.Item>
           );
         }}
       />
-      </Row>
+    </Row>
   );
 };
 
