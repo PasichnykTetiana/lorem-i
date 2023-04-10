@@ -2,7 +2,7 @@ import "./Card.less";
 import ScrollAnimation from "react-animate-on-scroll";
 
 import { Col, Row, Typography } from "antd";
-import { type FC } from "react";
+import { type FC, CSSProperties } from "react";
 import SectionContainer from "../../../components/section/SectionContainer";
 
 import card1 from "./img/card.png";
@@ -21,6 +21,14 @@ const Card: FC = () => {
   const heightLine = 1;
   const widthLine = 90;
 
+  const cardStyles: CSSProperties = {
+    position: "relative",
+    top: -heightTitle,
+    right: 0,
+    left: `${100 - widthLine}%`,
+    width: `${widthLine}%`,
+  }
+
   return (
     <SectionContainer>
       <div id={"invest"}>
@@ -32,6 +40,7 @@ const Card: FC = () => {
           </Col>
         </Row>
         <Row justify={isMD ? "center" : "space-between"}>
+
           {cards?.map((it) => (
             <Col span={isMD ? 25 : 7} key={it.title} className={"cards"}>
               <ScrollAnimation animateIn="fadeInRight">
@@ -41,13 +50,7 @@ const Card: FC = () => {
                   style={{ width: "100%", objectFit: "cover" }}
                 />
                 <div
-                  style={{
-                    position: "relative",
-                    top: -heightTitle,
-                    right: 0,
-                    left: `${100 - widthLine}%`,
-                    width: `${widthLine}%`,
-                  }}
+                  style={cardStyles}
                 >
                   <div style={{ background: "white", height: 1 }} />
                   <Row
