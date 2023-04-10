@@ -1,18 +1,11 @@
-import { FC, useState } from "react";
-import {
-  Menu,
-  MenuProps,
-  Row,
-  Drawer,
-  Button,
-  Typography,
-} from "antd";
+import { type FC, useState } from "react";
+import { Menu, type MenuProps, Row, Drawer, Button, Typography } from "antd";
 import { Link, NavLink } from "react-router-dom";
 import { MenuOutlined } from "@ant-design/icons";
 import { useBreakpoints } from "../screen";
 import { SvgIcon } from "../icon/SvgIcon";
 
-const data: Readonly<{ title: string; href: string }[]> = [
+const data: Readonly<Array<{ title: string; href: string }>> = [
   { title: "About us", href: "/about" },
 ] as const;
 
@@ -66,7 +59,6 @@ const Navigation: FC = () => {
             visible={visible}
             onClose={() => {
               setVisible(false);
-
             }}
           >
             <NavigationMenu
@@ -76,7 +68,6 @@ const Navigation: FC = () => {
               mode={"vertical"}
             />
           </Drawer>
-
         </Row>
       )}
     </Row>
