@@ -1,19 +1,16 @@
 import "./index.less";
 import { type FC, useEffect, useState } from "react";
-import { Button, Col, Row, Typography, Image, Dropdown, Space } from "antd";
-import { HeroSection } from "../../components/section";
+import { Col, Row, Typography, Image } from "antd";
 import SectionContainer from "../../components/section/SectionContainer";
 import { useParams } from "react-router-dom";
 import ContentService from "../../services/ContentServices";
 import { ButtonCart } from "../../components/layout/ButtonCart";
 import { useBreakpoints } from "../../components/screen";
 
-// import { We } from "./sections/index";
-
 const Product: FC = () => {
   const { id } = useParams();
   const [card, setCard] = useState<Partial<Product>>({});
-  const { isDesktop, isSM } = useBreakpoints();
+  const { isDesktop } = useBreakpoints();
 
   useEffect(() => {
     async function getProducts(x: string) {
