@@ -27,7 +27,7 @@ const Card: FC = () => {
     right: 0,
     left: `${100 - widthLine}%`,
     width: `${widthLine}%`,
-  }
+  };
 
   return (
     <SectionContainer>
@@ -40,7 +40,6 @@ const Card: FC = () => {
           </Col>
         </Row>
         <Row justify={isMD ? "center" : "space-between"}>
-
           {cards?.map((it) => (
             <Col span={isMD ? 25 : 7} key={it.title} className={"cards"}>
               <ScrollAnimation animateIn="fadeInRight">
@@ -49,9 +48,7 @@ const Card: FC = () => {
                   alt={it.title}
                   style={{ width: "100%", objectFit: "cover" }}
                 />
-                <div
-                  style={cardStyles}
-                >
+                <div style={cardStyles}>
                   <div style={{ background: "white", height: 1 }} />
                   <Row
                     align={"middle"}
