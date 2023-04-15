@@ -15,8 +15,6 @@ Built with the MERN stack (MongoDB, Express, React and NodeJS).
 ## Introduction
 This is a side project I've been working on. At the moment, I am integrating an online store option into it, in the future I will write an admin. part and maybe there will be some other ideas. This project is something I've been working on in my free time so I cannot be sure that everything will work out correctly. But I'll appreciate you if can report any issue or any recommendations.
 
-![Invoice Dashboard](https://res.cloudinary.com/almpo/image/upload/v1637314504/invoice/dashboard_c5z0is.png)
-
 ## Key Features
 
 - User registration.
