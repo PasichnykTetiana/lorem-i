@@ -97,7 +97,6 @@ export default class Store {
       const response = await axios.get<CartResponse>(`${API_URL}/cart`, {
         withCredentials: true,
       });
-      console.log(response, 'dsfsdfdsfdsf')
       this.setCart(response.data.products);
     } catch (e) {
       console.log(e);
