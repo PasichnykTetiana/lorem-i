@@ -95,11 +95,15 @@ class CartService {
 
     async getCart(refreshToken, cartId) {
         const userData = tokenService.validateRefreshToken(refreshToken);
-        let userId;
+        let userId = userData.id;
+        let cart;
         if (userData) {
-            userId = userData.id;
+            cart = await cartModel.findOne({user: userId});
         }
-        const cart = await cartModel.findOne({_id: cartId});
+        if(cartId){
+            cart = await cartModel.findOne({_id: cartId});
+        }
+
         return cart;
     }
 }

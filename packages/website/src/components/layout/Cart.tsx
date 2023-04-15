@@ -44,10 +44,10 @@ const Cart: FC = () => {
     }
 
     getProducts();
-    if (store.cart.length === 0) {
+    if (store.cart?.length === 0) {
       setIsModalOpen(false);
     }
-  }, [store.cart.length]);
+  }, [store.cart?.length]);
 
   const cardStyles: CSSProperties = {
     display: "flex",
@@ -67,7 +67,7 @@ const Cart: FC = () => {
         onOk={handleOk}
         onCancel={handleCancel}
       >
-        {store.cart.length ? (
+        {store.cart?.length ? (
           product.map((item?: Product, index?) => {
             return (
               <Row key={item?._id} gutter={[40, 0]} justify={"center"}>
