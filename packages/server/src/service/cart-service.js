@@ -18,7 +18,7 @@ class CartService {
             cart = await cartModel
                 .findOne({_id: cartId})
                 .populate("products.product");
-        } else {
+        } else if(userId) {
             cart = await cartModel
                 .findOne({user: userId})
                 .populate("products.product");
@@ -95,12 +95,11 @@ class CartService {
 
     async getCart(refreshToken, cartId) {
         const userData = tokenService.validateRefreshToken(refreshToken);
-        let userId = userData.id;
         let cart;
         if (userData) {
-            cart = await cartModel.findOne({user: userId});
+            cart = await cartModel.findOne({user: userData.id});
         }
-        if(cartId){
+        if (cartId){
             cart = await cartModel.findOne({_id: cartId});
         }
 
