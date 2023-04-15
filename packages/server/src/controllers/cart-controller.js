@@ -12,10 +12,12 @@ class CartController {
         cartId,
         1
       );
-      res.cookie("cartId", cart._id, {
-        maxAge: 30 * 24 * 60 * 60 * 1000,
-        httpOnly: true,
-      });
+      if(!refreshToken){
+        res.cookie("cartId", cart._id, {
+          maxAge: 30 * 24 * 60 * 60 * 1000,
+          httpOnly: true,
+        });
+      }
       res.status(200).json({ message: "Product added to cart" });
     } catch (err) {
       next(err);
