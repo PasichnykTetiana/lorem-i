@@ -34,6 +34,7 @@ class UserController {
         maxAge: 30 * 24 * 60 * 60 * 1000,
         httpOnly: true,
       });
+      res.clearCookie("cartId");
       return res.json(userData);
     } catch (e) {
       next(e);
