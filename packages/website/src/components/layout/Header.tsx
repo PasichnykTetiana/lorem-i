@@ -22,7 +22,6 @@ const Header: FC = () => {
     if (localStorage.getItem("token") && !store.isLoading) {
       store.checkCart();
     }
-    console.log(store.cart);
   }, []);
 
   const items: MenuProps["items"] = [
@@ -71,8 +70,7 @@ const Header: FC = () => {
               style={{ display: "flex", justifyContent: "center" }}
               to={"/"}
             >
-              {" "}
-              <img width={"50%"} src={img} />{" "}
+              <img width={"50%"} src={img} />
             </Link>
           )}
         </Col>
@@ -103,6 +101,7 @@ const Header: FC = () => {
                 </Button>
               </Col>
             ) : (
+                <Col>
               <Dropdown
                 menu={{ items }}
                 open={open}
@@ -119,6 +118,7 @@ const Header: FC = () => {
                   <Space>Log in</Space>
                 </a>
               </Dropdown>
+                </Col>
             )}
           </Row>
         </Col>
