@@ -17,7 +17,8 @@ app.use(cookieParser());
 app.use(
   cors({
     credentials: true,
-    origin: process.env.CLIENT_URL,
+    // origin: 'http://localhost:8888'
+     origin: process.env.CLIENT_URL,
   })
 );
 mongoose.set("strictQuery", false);
@@ -87,6 +88,19 @@ exports.handler = async (event) => {
       path.startsWith("/.netlify/functions/functions/api/logout")
     ) {
       result = await userService.logout();
+      return {
+        statusCode: 200,
+        headers: {
+          // "Set-Cookie": [
+          //   `refreshToken=; Max-Age=0; HttpOnly; Path=/; Domain=localhost;`,
+          // ],
+          "Set-Cookie": [
+            `refreshToken=; Max-Age=0; HttpOnly; Path=/; Domain=${process.env.DOMAIN};`,
+          ],
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(result),
+      }
     } else if (
       event.httpMethod === "POST" &&
       path.startsWith("/.netlify/functions/functions/api/login")
@@ -117,20 +131,28 @@ exports.handler = async (event) => {
       const cartId = getCartId(event.headers.cookie);
       result = await cartService.updateCartItem(id, refreshToken, cartId, -1);
     }
-    if (result.refreshToken) {
+    if (result && result.refreshToken) {
       return {
         statusCode: 200,
         headers: {
-          "Set-Cookie": `refreshToken=${result.refreshToken};Max-Age=2592000; HttpOnly; Path=/; Domain=${process.env.DOMAIN};`,
+          // "Set-Cookie": [
+          //   `refreshToken=${result.refreshToken}; Max-Age=2592000; HttpOnly; Path=/; Domain=localhost;`,
+          //   `cartId=; Max-Age=0; HttpOnly; Path=/; Domain=localhost;`
+          // ],
+          "Set-Cookie": [
+            `refreshToken=${result.refreshToken}; Max-Age=2592000; HttpOnly; Path=/; Domain=${process.env.DOMAIN};`,
+            `cartId=; Max-Age=0; HttpOnly; Path=/; Domain=${process.env.DOMAIN};`
+          ],
           "Content-Type": "application/json",
         },
         body: JSON.stringify(result),
       };
-    } else if (result.sessionId) {
+    } else if (result && result.sessionId) {
       return {
         statusCode: 200,
         headers: {
-          "Set-Cookie": `cartId=${result._id};Max-Age=2592000; HttpOnly; Path=/; Domain=${process.env.DOMAIN};`,
+          // "Set-Cookie": `cartId=${result._id};Max-Age=2592000; HttpOnly; Path=/; Domain=localhost`,
+          "Set-Cookie": `cartId=${result._id};Max-Age=2592000; HttpOnly; Path=/; Domain=${process.env.DOMAIN}`,
           "Content-Type": "application/json",
         },
         body: JSON.stringify(result),
