@@ -94,9 +94,7 @@ exports.handler = async (event) => {
           // "Set-Cookie": [
           //   `refreshToken=; Max-Age=0; HttpOnly; Path=/; Domain=localhost;`,
           // ],
-          "Set-Cookie": [
-            `refreshToken=; Max-Age=0; HttpOnly; Path=/; Domain=${process.env.DOMAIN};`,
-          ],
+          "Set-Cookie": `refreshToken=; Max-Age=0; HttpOnly; Path=/; Domain=${process.env.DOMAIN};`,
           "Content-Type": "application/json",
         },
         body: JSON.stringify(result),
