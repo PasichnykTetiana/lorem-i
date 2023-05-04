@@ -12,7 +12,7 @@ class CartController {
         cartId,
         1
       );
-      if(!refreshToken){
+      if (!refreshToken) {
         res.cookie("cartId", cart._id, {
           maxAge: 30 * 24 * 60 * 60 * 1000,
           httpOnly: true,

@@ -101,24 +101,24 @@ const Header: FC = () => {
                 </Button>
               </Col>
             ) : (
-                <Col>
-              <Dropdown
-                menu={{ items }}
-                open={open}
-                autoFocus={false}
-                onOpenChange={handleOpenChange}
-                trigger={["click"]}
-              >
-                <a
-                  style={{ margin: "0 0 0 4px" }}
-                  onClick={(e) => {
-                    e.preventDefault();
-                  }}
+              <Col>
+                <Dropdown
+                  menu={{ items }}
+                  open={open}
+                  autoFocus={false}
+                  onOpenChange={handleOpenChange}
+                  trigger={["click"]}
                 >
-                  <Space>Log in</Space>
-                </a>
-              </Dropdown>
-                </Col>
+                  <a
+                    style={{ margin: "0 0 0 4px" }}
+                    onClick={(e) => {
+                      e.preventDefault();
+                    }}
+                  >
+                    <Space>Log in</Space>
+                  </a>
+                </Dropdown>
+              </Col>
             )}
           </Row>
         </Col>
