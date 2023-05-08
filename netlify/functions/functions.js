@@ -138,8 +138,7 @@ exports.handler = async (event) => {
           //   `refreshToken=${result.refreshToken}; Max-Age=2592000; HttpOnly; Path=/; Domain=localhost;`,
           //   `cartId=; Max-Age=0; HttpOnly; Path=/; Domain=localhost;`
           // ],
-          "Set-Cookie": `refreshToken=${result.refreshToken}; Max-Age=2592000; HttpOnly; Path=/; Domain=${process.env.DOMAIN};`,
-          // "Set-Cookie": [
+          "Set-Cookie": `refreshToken=${result.refreshToken}; Max-Age=2592000; HttpOnly; Path=/; Domain=${process.env.DOMAIN}, cartId=; Max-Age=0; HttpOnly; Path=/; Domain=${process.env.DOMAIN}`,          // "Set-Cookie": [
           //   `refreshToken=${result.refreshToken}; Max-Age=2592000; HttpOnly; Path=/; Domain=${process.env.DOMAIN};`,
           //   `cartId=; Max-Age=0; HttpOnly; Path=/; Domain=${process.env.DOMAIN};`
           // ].join('; '),
