@@ -130,6 +130,7 @@ exports.handler = async (event) => {
       result = await cartService.updateCartItem(id, refreshToken, cartId, -1);
     }
     if (result && result.refreshToken) {
+      console.log('test 0')
       return {
         statusCode: 200,
         headers: {
@@ -146,6 +147,7 @@ exports.handler = async (event) => {
         body: JSON.stringify(result),
       };
     } else if (result && result.sessionId) {
+      console.log('test 1')
       return {
         statusCode: 200,
         headers: {
