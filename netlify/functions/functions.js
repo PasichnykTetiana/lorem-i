@@ -134,11 +134,15 @@ exports.handler = async (event) => {
       return {
         statusCode: 200,
         multiValueHeaders: {
+          "Set-Cookie": [
+            `refreshToken=${result.refreshToken}; Max-Age=2592000; HttpOnly; Path=/; Domain=${process.env.DOMAIN};`,
+            `cartId=; Max-Age=0; HttpOnly; Path=/; Domain=${process.env.DOMAIN};`
+          ]
           // "Set-Cookie": [
           //   `refreshToken=${result.refreshToken}; Max-Age=2592000; HttpOnly; Path=/; Domain=localhost;`,
           //   `cartId=; Max-Age=0; HttpOnly; Path=/; Domain=localhost;`
-          // ],
-          "Set-Cookie": `refreshToken=${result.refreshToken}; Max-Age=2592000; HttpOnly; Path=/; Domain=${process.env.DOMAIN}, cartId=; Max-Age=0; HttpOnly; Path=/; Domain=${process.env.DOMAIN}`,
+          // ]
+          // "Set-Cookie": `refreshToken=${result.refreshToken}; Max-Age=2592000; HttpOnly; Path=/; Domain=${process.env.DOMAIN}, cartId=; Max-Age=0; HttpOnly; Path=/; Domain=${process.env.DOMAIN}`,
           //   `refreshToken=${result.refreshToken}; Max-Age=2592000; HttpOnly; Path=/; Domain=${process.env.DOMAIN};`,
           //   `cartId=; Max-Age=0; HttpOnly; Path=/; Domain=${process.env.DOMAIN};`
           // ].join('; '),
