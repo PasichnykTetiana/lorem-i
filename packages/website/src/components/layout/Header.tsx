@@ -19,10 +19,10 @@ const Header: FC = () => {
     setOpen(flag);
   };
   useEffect(() => {
-    if (localStorage.getItem("token") && !store.isLoading) {
+    if (!store.isLoading) {
       store.checkCart();
     }
-  }, []);
+  }, [store.isAuth]);
 
   const items: MenuProps["items"] = [
     {
