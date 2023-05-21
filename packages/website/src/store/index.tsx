@@ -41,8 +41,10 @@ export default class Store {
 
   async registration(data: Data) {
     try {
+      console.log(data)
       const response = await registration(data);
       this.setRegistration(true);
+      console.log(response)
       this.setUserName(response.data.user.username);
       this.setAuth(true);
       localStorage.setItem("token", response.data.accessToken);
