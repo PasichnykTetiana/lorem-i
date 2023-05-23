@@ -100,7 +100,7 @@ exports.handler = async (event) => {
         },
         body: JSON.stringify(result),
       }
-    } else if (event.httpMethod === "POST" && event.path === "/registration") {
+    } else if (event.httpMethod === "POST" && event.path === "/.netlify/functions/functions/api/registration") {
       const requestBody = JSON.parse(event.body);
       const { email, username, password } = requestBody;
       const validationErrors = validationResult(requestBody);
@@ -111,7 +111,7 @@ exports.handler = async (event) => {
         };
       }
       try {
-        const result = await userService.registration(email, username, password);
+        const result = await userService.registration(email, password,username );
         return {
           statusCode: 200,
           body: JSON.stringify(result),
