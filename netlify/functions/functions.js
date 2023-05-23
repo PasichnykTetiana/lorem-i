@@ -8,6 +8,7 @@ const productsService = require("../../packages/server/src/service/product-servi
 const weService = require("../../packages/server/src/service/we-service");
 const userService = require("../../packages/server/src/service/user-service");
 const cartService = require("../../packages/server/src/service/cart-service");
+const { validationResult } = require("express-validator");
 
 const authMiddleware = require("../../packages/server/src/middlewares/auth-middleware");
 
@@ -99,7 +100,30 @@ exports.handler = async (event) => {
         },
         body: JSON.stringify(result),
       }
-    } else if (
+    } else if (event.httpMethod === "POST" && event.path === "/registration") {
+      const requestBody = JSON.parse(event.body);
+      const { email, username, password } = requestBody;
+      const validationErrors = validationResult(requestBody);
+      if (!validationErrors.isEmpty()) {
+        return {
+          statusCode: 400,
+          body: JSON.stringify({ errors: validationErrors.array() }),
+        };
+      }
+      try {
+        const result = await userService.registration(email, username, password);
+        return {
+          statusCode: 200,
+          body: JSON.stringify(result),
+        };
+      } catch (error) {
+        return {
+          statusCode: 500,
+          body: JSON.stringify({ message: "Internal server error" }),
+        };
+      }
+    }
+    else if (
       event.httpMethod === "POST" &&
       path.startsWith("/.netlify/functions/functions/api/login")
     ) {
