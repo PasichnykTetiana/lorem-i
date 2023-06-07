@@ -46,7 +46,7 @@ export default class Store {
       this.setRegistration(true);
       console.log(response)
       this.setUserName(response.data.user.username);
-      this.setAuth(true);
+    //  this.setAuth(true);
       localStorage.setItem("token", response.data.accessToken);
     } catch (e) {
       console.log(e);

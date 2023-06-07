@@ -92,7 +92,7 @@ class UserService {
 
     await tokenService.saveToken(userDto.id, tokens.refreshToken);
 
-    if (tokenFromDb) {
+    if (tokenFromDb && userData.isActivated) {
       return { ...tokens, user: userDto };
     }
   }
