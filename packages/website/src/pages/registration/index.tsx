@@ -14,9 +14,9 @@ const Auth: FC = () => {
 
   const onFinish = (data: Data) => {
     store.registration(data);
-    if (localStorage.getItem("token")) {
-      store.checkAuth();
-    }
+    // if (localStorage.getItem("token")) {
+    //   store.checkAuth();
+    // }
   };
 
   useEffect(() => {
@@ -27,7 +27,7 @@ const Auth: FC = () => {
 
   return (
     <SectionContainer>
-      {!store.isAuth ? (
+      {!store.isRegistration ? (
         <Form
           name="data"
           labelCol={{ span: 8 }}
@@ -84,10 +84,10 @@ const Auth: FC = () => {
           </Form.Item>
         </Form>
       ) : (
-        <NavLink to="/">
-          <Button type="primary" htmlType="submit">
-            Homepage
-          </Button>
+        <NavLink to="/">активирйте свой акк по емсейол
+          {/*<Button type="primary" htmlType="submit">*/}
+          {/*  Homepage*/}
+          {/*</Button>*/}
         </NavLink>
       )}
     </SectionContainer>

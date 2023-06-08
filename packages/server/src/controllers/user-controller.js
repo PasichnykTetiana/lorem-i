@@ -30,10 +30,13 @@ class UserController {
     try {
       const { email, password } = req.body;
       const userData = await userService.login(email, password);
-      res.cookie("refreshToken", userData.refreshToken, {
-        maxAge: 30 * 24 * 60 * 60 * 1000,
-        httpOnly: true,
-      });
+      if(userData.refreshToken){
+        res.cookie("refreshToken", userData.refreshToken, {
+          maxAge: 30 * 24 * 60 * 60 * 1000,
+          httpOnly: true,
+        });
+      } //*
+
       res.clearCookie("cartId");
       return res.json(userData);
     } catch (e) {
