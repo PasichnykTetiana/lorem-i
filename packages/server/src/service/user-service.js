@@ -62,11 +62,16 @@ class UserService {
     const tokens = tokenService.generateTokens({ ...userDto });
 
     await tokenService.saveToken(userDto.id, tokens.refreshToken); // save to db
-
-    return {
-      ...tokens,
-      user: userDto,
-    };
+if(userDto.isActivated){
+  return {
+    ...tokens,
+    user: userDto,
+  }
+}else {
+  return {
+    user: userDto,
+  }
+}
   }
 
   async logout(refreshToken) {

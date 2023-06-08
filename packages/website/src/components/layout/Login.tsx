@@ -1,6 +1,6 @@
 import { type FC } from "react";
 import "./index.less";
-import { Button, Form, Input } from "antd";
+import { Button, Form, Input, Typography } from "antd";
 import { useContext } from "react";
 
 import { Context } from "../app";
@@ -22,6 +22,9 @@ const Login: FC = () => {
       onFinish={onFinish}
       autoComplete="off"
     >
+      {!store.isAuth && store.userName &&           <Typography.Paragraph style={{ textAlign: "center" }} >
+        You must confirm your email address
+      </Typography.Paragraph>}
       <Form.Item
         label="Email"
         name="email"

@@ -56,7 +56,10 @@ export default class Store {
   async login(data: Data) {
     try {
       const response = await login(data);
-      this.setAuth(true);
+      console.log(response.data.user.isActivated)
+      if(response.data.user.isActivated){
+        this.setAuth(true);
+      }
       this.setUserName(response.data.user.username);
       localStorage.setItem("token", response.data.accessToken);
     } catch (e) {
