@@ -1,6 +1,6 @@
 import { type FC, useContext, useEffect } from "react";
 import "./index.less";
-import { Button, Form, Input } from "antd";
+import { Button, Form, Input, Typography } from "antd";
 import { NavLink } from "react-router-dom";
 import { Context } from "../../components/app";
 import { observer } from "mobx-react-lite";
@@ -85,6 +85,7 @@ const Auth: FC = () => {
         </Form>
       ) : (
         <NavLink to="/">активирйте свой акк по емсейол
+          <Typography.Paragraph>Please activate your account by following the link sent to your email</Typography.Paragraph>
           {/*<Button type="primary" htmlType="submit">*/}
           {/*  Homepage*/}
           {/*</Button>*/}
