@@ -10,6 +10,7 @@ const Login: FC = () => {
   const { store } = useContext(Context);
 
   const onFinish = (data: Data) => {
+    console.log(data)
     store.login(data);
   };
 
@@ -22,8 +23,11 @@ const Login: FC = () => {
       onFinish={onFinish}
       autoComplete="off"
     >
-      {!store.isAuth && store.userName &&           <Typography.Paragraph style={{ textAlign: "center" }} >
+      {!store.isAuth && store.userName && <Typography.Paragraph style={{ textAlign: "center" }} >
         You must confirm your email address
+      </Typography.Paragraph>}
+      {store.userName === null && <Typography.Paragraph style={{ textAlign: "center" }} >
+        Email or password entered incorrectly
       </Typography.Paragraph>}
       <Form.Item
         label="Email"

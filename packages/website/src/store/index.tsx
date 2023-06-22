@@ -7,7 +7,7 @@ export default class Store {
   isAuth = false;
   isRegistration = false;
   user = {} as User;
-  userName = "" as string;
+  userName = "" as string | null;
   isLoading = false;
   cart = [] as Cart[];
 
@@ -31,7 +31,7 @@ export default class Store {
     this.cart = cart;
   }
 
-  setUserName(userName: string) {
+  setUserName(userName: string | null) {
     this.userName = userName;
   }
 
@@ -63,6 +63,7 @@ export default class Store {
       this.setUserName(response.data.user.username);
       localStorage.setItem("token", response.data.accessToken);
     } catch (e) {
+      this.setUserName(null);
       console.log(e);
     }
   }
